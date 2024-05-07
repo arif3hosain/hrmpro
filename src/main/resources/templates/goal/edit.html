@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{goal.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{goal.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/goals}" class="btn btn-secondary">[[#{goal.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('goal')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='goal', field='id', disabled=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='goal', field='goalDescription')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='goal', field='targetDate', inputClass='js-datepicker')}" />
+                <input type="submit" th:value="#{goal.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

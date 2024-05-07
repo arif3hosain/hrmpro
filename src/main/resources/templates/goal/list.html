@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{goal.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{goal.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/goals/add}" class="btn btn-primary ms-2">[[#{goal.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${goals.empty}">[[#{goal.list.empty}]]</div>
+            <div th:if="${!goals.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{goal.id.label}]]</th>
+                            <th scope="col">[[#{goal.goalDescription.label}]]</th>
+                            <th scope="col">[[#{goal.completed.label}]]</th>
+                            <th scope="col">[[#{goal.targetDate.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="goal : ${goals}">
+                            <td>[[${goal.id}]]</td>
+                            <td>[[${goal.goalDescription}]]</td>
+                            <td>[[${goal.completed}]]</td>
+                            <td>[[${goal.targetDate}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/goals/edit/{id}(id=${goal.id})}" class="btn btn-sm btn-secondary">[[#{goal.list.edit}]]</a>
+                                    <form th:action="@{/goals/delete/{id}(id=${goal.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{goal.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
