@@ -24,6 +24,8 @@ public class EmployeeDTO {
     @Size(max = 20)
     private String phone;
 
+
+
     public Long getId() {
         return id;
     }

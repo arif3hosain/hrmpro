@@ -1,10 +1,6 @@
 package com.hrm.hrmpro.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -26,6 +22,10 @@ public class Employee {
 
     @Column(nullable = false, length = 20)
     private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "department", nullable = false, referencedColumnName = "id")
+    private Department department;
 
     public Long getId() {
         return id;
@@ -67,4 +67,11 @@ public class Employee {
         this.phone = phone;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }
