@@ -16,10 +16,9 @@
             <form th:action="${requestUri}" method="post">
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='id', disabled=true, type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='title', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='job', field='description', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='job', field='department', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='job', field='description', required=true, type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='job', field='category', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='salary', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='job', field='postedDate', inputClass='js-datepicker')}" />
                 <input type="submit" th:value="#{job.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

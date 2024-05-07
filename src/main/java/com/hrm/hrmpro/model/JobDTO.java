@@ -14,12 +14,12 @@ public class JobDTO {
     private String title;
 
     @NotNull
-    @Size(max = 500)
+    @Size(max = 5000)
     private String description;
 
     @NotNull
     @Size(max = 100)
-    private String department;
+    private String category;
 
     @NotNull
     private Double salary;
@@ -50,12 +50,12 @@ public class JobDTO {
         this.description = description;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDepartment(final String department) {
-        this.department = department;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Double getSalary() {

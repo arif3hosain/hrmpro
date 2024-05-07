@@ -4,6 +4,8 @@ import com.hrm.hrmpro.domain.Job;
 import com.hrm.hrmpro.model.JobDTO;
 import com.hrm.hrmpro.repos.JobRepository;
 import com.hrm.hrmpro.util.NotFoundException;
+
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -52,18 +54,17 @@ public class JobService {
         jobDTO.setId(job.getId());
         jobDTO.setTitle(job.getTitle());
         jobDTO.setDescription(job.getDescription());
-        jobDTO.setDepartment(job.getDepartment());
+        jobDTO.setCategory(job.getCategory());
         jobDTO.setSalary(job.getSalary());
-        jobDTO.setPostedDate(job.getPostedDate());
+        jobDTO.setPostedDate(LocalDate.now());
         return jobDTO;
     }
 
     private Job mapToEntity(final JobDTO jobDTO, final Job job) {
         job.setTitle(jobDTO.getTitle());
         job.setDescription(jobDTO.getDescription());
-        job.setDepartment(jobDTO.getDepartment());
+        job.setCategory(jobDTO.getCategory());
         job.setSalary(jobDTO.getSalary());
-        job.setPostedDate(jobDTO.getPostedDate());
         return job;
     }
 

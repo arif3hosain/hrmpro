@@ -9,9 +9,11 @@ import jakarta.persistence.*;
  */
 
 
+
+
+
 @Entity
 public class JobApplicant {
-
 
     @Id
     @Column(nullable = false, updatable = false)
@@ -19,15 +21,16 @@ public class JobApplicant {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "applicant_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "applicant_id", referencedColumnName = "id")
     private Applicant applicant;
 
     @ManyToOne
-    @JoinColumn(name = "job_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
 
     public JobApplicant() {
     }
+
 
     public Long getId() {
         return id;

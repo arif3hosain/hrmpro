@@ -24,7 +24,7 @@ public class Employee {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "department", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "department", referencedColumnName = "id")
     private Department department;
 
     public Long getId() {

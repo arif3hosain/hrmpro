@@ -19,11 +19,11 @@ public class Job {
     @Column(nullable = false, length = 150)
     private String title;
 
-    @Column(nullable = false, name = "\"description\"", length = 500)
+    @Column(nullable = false, name = "\"description\"", length = 5000)
     private String description;
 
     @Column(nullable = false, length = 100)
-    private String department;
+    private String category;
 
     @Column(nullable = false)
     private Double salary;
@@ -55,12 +55,12 @@ public class Job {
         this.description = description;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDepartment(final String department) {
-        this.department = department;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Double getSalary() {
