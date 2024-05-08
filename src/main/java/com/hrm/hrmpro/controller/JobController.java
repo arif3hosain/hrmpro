@@ -1,9 +1,14 @@
 package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.domain.Job;
+import com.hrm.hrmpro.domain.JobApplicant;
 import com.hrm.hrmpro.model.ApplicantDTO;
 import com.hrm.hrmpro.model.JobDTO;
+import com.hrm.hrmpro.repos.ApplicantRepository;
+import com.hrm.hrmpro.repos.JobApplicantRepo;
 import com.hrm.hrmpro.repos.JobRepository;
+import com.hrm.hrmpro.service.ApplicantService;
+import com.hrm.hrmpro.service.JobApplicantService;
 import com.hrm.hrmpro.service.JobService;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
@@ -26,6 +31,14 @@ public class JobController {
     private final JobService jobService;
     @Autowired
     private JobRepository jobRepository;
+    @Autowired
+    private JobApplicantRepo jobApplicantRepo;
+    @Autowired
+    private ApplicantRepository applicantRepository;
+    @Autowired
+    private ApplicantService applicantService;
+    @Autowired
+    private JobApplicantService jobApplicantService;
 
     public JobController(final JobService jobService) {
         this.jobService = jobService;
@@ -91,30 +104,27 @@ public class JobController {
         model.addAttribute("job", jobService.get(id));
         return "job/job-details";
     }
-
-/*
     @GetMapping("/apply/{id}")
-    public String apply(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("job", jobService.get(id));
-        return "job/job-details";
+    public String add(@PathVariable("id") Long id, @ModelAttribute("applicant") final ApplicantDTO applicant, Model model) {
+        applicant.setJobId(id);
+        model.addAttribute("applicant", applicant);
+        return "job/apply";
     }
 
-*/
-
-    @GetMapping("/apply/{id}")
-    public String add(@ModelAttribute("applicant") final ApplicantDTO applicantDTO) {
-        return "applicant/add";
-    }
-
-    @PostMapping("/add")
+    @PostMapping("/apply")
     public String add(@ModelAttribute("applicant") @Valid final ApplicantDTO applicantDTO,
                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "applicant/add";
+        if(jobApplicantService.alreadyApplied(applicantDTO)){
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Already applied to this job"));
+            return "redirect:/jobs/view/"+applicantDTO.getJobId();
         }
-        applicantService.create(applicantDTO);
+        if (bindingResult.hasErrors()) {
+            return "job/apply";
+        }
+        JobApplicant application = new JobApplicant(applicantService.create(applicantDTO), jobRepository.getOne(applicantDTO.getJobId()));
+        jobApplicantRepo.save(application);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("applicant.create.success"));
-        return "redirect:/applicants";
+        return "redirect:/jobs/view/"+applicantDTO.getJobId();
     }
 
 }

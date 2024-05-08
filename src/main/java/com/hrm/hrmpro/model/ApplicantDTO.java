@@ -90,4 +90,17 @@ public class ApplicantDTO {
     public void setJobId(Long jobId) {
         this.jobId = jobId;
     }
+
+    @Override
+    public String toString() {
+        return "ApplicantDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", resumeUrl='" + resumeUrl + '\'' +
+                ", jobId=" + jobId +
+                '}';
+    }
 }

@@ -31,6 +31,10 @@ public class JobApplicant {
     public JobApplicant() {
     }
 
+    public JobApplicant(Applicant applicant, Job job) {
+        this.applicant = applicant;
+        this.job = job;
+    }
 
     public Long getId() {
         return id;

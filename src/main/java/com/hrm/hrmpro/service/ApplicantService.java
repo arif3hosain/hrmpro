@@ -31,10 +31,10 @@ public class ApplicantService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final ApplicantDTO applicantDTO) {
+    public Applicant create(final ApplicantDTO applicantDTO) {
         final Applicant applicant = new Applicant();
         mapToEntity(applicantDTO, applicant);
-        return applicantRepository.save(applicant).getId();
+        return applicantRepository.save(applicant);
     }
 
     public void update(final Long id, final ApplicantDTO applicantDTO) {

@@ -5,7 +5,10 @@ package com.hrm.hrmpro.service;
  * Mail: arif@innoweb.co
  * Created at : 5/7/2024
  */
+import com.hrm.hrmpro.domain.Applicant;
 import com.hrm.hrmpro.domain.JobApplicant;
+import com.hrm.hrmpro.model.ApplicantDTO;
+import com.hrm.hrmpro.repos.ApplicantRepository;
 import com.hrm.hrmpro.repos.JobApplicantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,8 @@ import java.util.List;
 public class JobApplicantService {
 
     private final JobApplicantRepo JobApplicantRepo;
+    @Autowired
+    private ApplicantRepository applicantRepository;
 
     @Autowired
     public JobApplicantService(JobApplicantRepo JobApplicantRepo) {
@@ -38,5 +43,14 @@ public class JobApplicantService {
         return JobApplicantRepo.findAll();
     }
 
+    public boolean alreadyApplied (ApplicantDTO applicantDTO){
+        Applicant applicant = applicantRepository.getApplicant(applicantDTO.getEmail());
+       if(applicant != null){
+           if(JobApplicantRepo.exits(applicantDTO.getJobId(), applicant.getId()) != null){
+               return true;
+           }
+       }
+        return false;
+    }
 
 }
