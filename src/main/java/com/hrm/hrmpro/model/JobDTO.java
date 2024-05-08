@@ -2,6 +2,7 @@ package com.hrm.hrmpro.model;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 
@@ -25,6 +26,8 @@ public class JobDTO {
     private Double salary;
 
     private LocalDate postedDate;
+
+
 
     public Long getId() {
         return id;

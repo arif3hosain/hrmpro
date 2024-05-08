@@ -37,6 +37,7 @@
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/jobs/edit/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{job.list.edit}]]</a>
+                                    <a th:href="@{/jobs/view/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{button.view}]]</a>
                                     <form th:action="@{/jobs/delete/{id}(id=${job.id})}"
                                             th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">[[#{job.list.delete}]]</button>

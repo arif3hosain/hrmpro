@@ -1,5 +1,6 @@
 package com.hrm.hrmpro.model;
 
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -29,6 +30,10 @@ public class ApplicantDTO {
     @NotNull
     @Size(max = 500)
     private String resumeUrl;
+
+    @Transient
+    private Long jobId;
+
 
     public Long getId() {
         return id;
@@ -78,4 +83,11 @@ public class ApplicantDTO {
         this.resumeUrl = resumeUrl;
     }
 
+    public Long getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
+    }
 }
