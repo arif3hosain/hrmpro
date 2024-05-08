@@ -1,5 +1,9 @@
 package com.hrm.hrmpro.model;
 
+import com.hrm.hrmpro.domain.Department;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -24,6 +28,8 @@ public class EmployeeDTO {
     @Size(max = 20)
     private String phone;
 
+    @NotNull
+    private Department department;
 
 
     public Long getId() {
@@ -66,4 +72,23 @@ public class EmployeeDTO {
         this.phone = phone;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", department=" + department +
+                '}';
+    }
 }

@@ -13,11 +13,23 @@
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('employee')}" />
-            <form th:action="${requestUri}" method="post">
+            <form th:action="${requestUri}" method="post" th:method="${employee}">
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='firstName', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
+                <div class="row mb-3">
+                    <label  class="col-md-2 col-form-label">
+                        <span>Department*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control"   th:field="*{employee.department}" name="validation-required" required="required">
+                            <option value="">Choose...</option>
+                            <option th:each="d : ${departments}" th:value="${d.id}"
+                                    th:text="${d.name}"></option>
+                        </select>
+                    </div>
+                </div>
                 <input type="submit" th:value="#{employee.add.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

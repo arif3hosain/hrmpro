@@ -22,6 +22,7 @@
                             <th scope="col">[[#{employee.lastName.label}]]</th>
                             <th scope="col">[[#{employee.email.label}]]</th>
                             <th scope="col">[[#{employee.phone.label}]]</th>
+                            <th scope="col">Department</th>
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -32,9 +33,10 @@
                             <td>[[${employee.lastName}]]</td>
                             <td>[[${employee.email}]]</td>
                             <td>[[${employee.phone}]]</td>
+                            <td>[[${employee.department.name}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
-                                    <a th:href="@{/employees/edit/{id}(id=${employee.id})}" class="btn btn-sm btn-secondary">[[#{employee.list.edit}]]</a>
+                                    <a th:href="@{/employees/edit/{id}(id=${employee.id})}" class="btn btn-sm btn-secondary">Update Profile</a>
                                     <form th:action="@{/employees/delete/{id}(id=${employee.id})}"
                                             th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">[[#{employee.list.delete}]]</button>

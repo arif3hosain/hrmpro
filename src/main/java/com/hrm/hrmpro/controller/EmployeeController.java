@@ -1,9 +1,14 @@
 package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.model.EmployeeDTO;
+import com.hrm.hrmpro.repos.DepartmentRepository;
+import com.hrm.hrmpro.repos.EmployeeRepository;
+import com.hrm.hrmpro.service.DepartmentService;
 import com.hrm.hrmpro.service.EmployeeService;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +25,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    @Autowired
+    private DepartmentRepository departmentRepository;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public EmployeeController(final EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -32,7 +43,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String add(@ModelAttribute("employee") final EmployeeDTO employeeDTO) {
+    public String add(@ModelAttribute("employee") final EmployeeDTO employeeDTO, Model model) {
+        model.addAttribute("departments", departmentRepository.findAll());
         return "employee/add";
     }
 
@@ -49,7 +61,10 @@ public class EmployeeController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id, final Model model) {
-        model.addAttribute("employee", employeeService.get(id));
+        EmployeeDTO dto = employeeService.get(id);
+        System.out.println(dto.toString());
+        model.addAttribute("employee",dto );
+        model.addAttribute("departments", departmentRepository.findAll());
         return "employee/edit";
     }
 

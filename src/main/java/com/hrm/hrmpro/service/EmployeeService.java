@@ -2,9 +2,12 @@ package com.hrm.hrmpro.service;
 
 import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.model.EmployeeDTO;
+import com.hrm.hrmpro.repos.DepartmentRepository;
 import com.hrm.hrmpro.repos.EmployeeRepository;
 import com.hrm.hrmpro.util.NotFoundException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     public EmployeeService(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -54,6 +59,7 @@ public class EmployeeService {
         employeeDTO.setLastName(employee.getLastName());
         employeeDTO.setEmail(employee.getEmail());
         employeeDTO.setPhone(employee.getPhone());
+        employeeDTO.setDepartment(employee.getDepartment());
         return employeeDTO;
     }
 
@@ -62,6 +68,7 @@ public class EmployeeService {
         employee.setLastName(employeeDTO.getLastName());
         employee.setEmail(employeeDTO.getEmail());
         employee.setPhone(employeeDTO.getPhone());
+        employee.setDepartment(departmentRepository.getOne(employeeDTO.getDepartment().getId()));
         return employee;
     }
 

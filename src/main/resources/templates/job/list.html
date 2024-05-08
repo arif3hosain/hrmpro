@@ -7,9 +7,9 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{job.list.headline}]]</h1>
+                <h5 class="flex-grow-1">Open Job List</h5>
                 <div>
-                    <a th:href="@{/jobs/add}" class="btn btn-primary ms-2">[[#{job.list.createNew}]]</a>
+                    <a th:href="@{/jobs/add}" class="btn btn-primary ms-2">Post Job</a>
                 </div>
             </div>
             <div th:if="${jobs.empty}">[[#{job.list.empty}]]</div>
