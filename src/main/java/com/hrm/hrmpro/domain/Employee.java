@@ -2,6 +2,8 @@ package com.hrm.hrmpro.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 
 @Entity
 public class Employee {
@@ -26,6 +28,9 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department", referencedColumnName = "id")
     private Department department;
+
+    @Column(nullable = false)
+    private LocalDate joinDate;
 
     public Long getId() {
         return id;
@@ -73,6 +78,14 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public LocalDate getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(LocalDate joinDate) {
+        this.joinDate = joinDate;
     }
 
     @Override

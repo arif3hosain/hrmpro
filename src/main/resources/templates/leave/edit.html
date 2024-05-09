@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>[[#{leave.edit.headline}]]</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex flex-wrap mb-4">
+        <h1 class="flex-grow-1">[[#{leave.edit.headline}]]</h1>
+        <div>
+            <a th:href="@{/leaves}" class="btn btn-secondary">[[#{leave.edit.back}]]</a>
+        </div>
+    </div>
+    <div th:replace="~{fragments/forms::globalErrors('leave')}" />
+    <form th:action="${requestUri}" method="post">
+        <div th:replace="~{fragments/forms::inputRow(object='leave', field='id', disabled=true, type='number')}" />
+        <div th:replace="~{fragments/forms::inputRow(object='leave', field='startDate', required=true, inputClass='js-datepicker')}" />
+        <div th:replace="~{fragments/forms::inputRow(object='leave', field='endDate', required=true, inputClass='js-datepicker')}" />
+        <div th:replace="~{fragments/forms::inputRow(object='leave', field='reason',  type='textarea')}" />
+        <input type="submit" th:value="#{leave.edit.headline}" class="btn btn-primary mt-4" />
+    </form>
+</div>
+</body>
+</html>

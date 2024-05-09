@@ -7,6 +7,8 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+
 
 public class EmployeeDTO {
 
@@ -31,6 +33,8 @@ public class EmployeeDTO {
     @NotNull
     private Department department;
 
+    @NotNull
+    private LocalDate joinDate;
 
     public Long getId() {
         return id;
@@ -78,6 +82,14 @@ public class EmployeeDTO {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public LocalDate getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(LocalDate joinDate) {
+        this.joinDate = joinDate;
     }
 
     @Override

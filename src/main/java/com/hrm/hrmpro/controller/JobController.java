@@ -122,6 +122,8 @@ public class JobController {
         if (bindingResult.hasErrors()) {
             return "job/apply";
         }
+        applicantDTO.setHired(false);
+        applicantDTO.setDeny(false);
         JobApplicant application = new JobApplicant(applicantService.create(applicantDTO), jobRepository.getOne(applicantDTO.getJobId()));
         jobApplicantRepo.save(application);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Application has been successfully submitted"));

@@ -24,7 +24,7 @@ public class EmployeeService {
     }
 
     public List<EmployeeDTO> findAll() {
-        final List<Employee> employees = employeeRepository.findAll(Sort.by("id"));
+        final List<Employee> employees = employeeRepository.findAll(Sort.by("firstName"));
         return employees.stream()
                 .map(employee -> mapToDTO(employee, new EmployeeDTO()))
                 .toList();
@@ -60,6 +60,7 @@ public class EmployeeService {
         employeeDTO.setEmail(employee.getEmail());
         employeeDTO.setPhone(employee.getPhone());
         employeeDTO.setDepartment(employee.getDepartment());
+        employeeDTO.setJoinDate(employee.getJoinDate());
         return employeeDTO;
     }
 
@@ -69,6 +70,7 @@ public class EmployeeService {
         employee.setEmail(employeeDTO.getEmail());
         employee.setPhone(employeeDTO.getPhone());
         employee.setDepartment(departmentRepository.getOne(employeeDTO.getDepartment().getId()));
+        employee.setJoinDate(employeeDTO.getJoinDate());
         return employee;
     }
 

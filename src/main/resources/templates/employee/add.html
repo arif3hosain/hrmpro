@@ -18,6 +18,8 @@
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='employee', field='joinDate', required=true, inputClass='js-datepicker')}" />
+
                 <div class="row mb-3">
                     <label  class="col-md-2 col-form-label">
                         <span>Department*</span>
