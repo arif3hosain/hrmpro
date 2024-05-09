@@ -31,6 +31,8 @@ public class ApplicantDTO {
     @Size(max = 500)
     private String resumeUrl;
 
+    private Boolean hired;
+    private Boolean deny;
     @Transient
     private Long jobId;
 
@@ -89,6 +91,22 @@ public class ApplicantDTO {
 
     public void setJobId(Long jobId) {
         this.jobId = jobId;
+    }
+
+    public Boolean getHired() {
+        return hired;
+    }
+
+    public void setHired(Boolean hired) {
+        this.hired = hired;
+    }
+
+    public Boolean getDeny() {
+        return deny;
+    }
+
+    public void setDeny(Boolean deny) {
+        this.deny = deny;
     }
 
     @Override

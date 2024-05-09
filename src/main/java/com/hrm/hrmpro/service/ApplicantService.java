@@ -55,6 +55,8 @@ public class ApplicantService {
         applicantDTO.setEmail(applicant.getEmail());
         applicantDTO.setPhone(applicant.getPhone());
         applicantDTO.setResumeUrl(applicant.getResumeUrl());
+        applicantDTO.setHired(false);
+        applicantDTO.setDeny(false);
         return applicantDTO;
     }
 
@@ -64,6 +66,8 @@ public class ApplicantService {
         applicant.setEmail(applicantDTO.getEmail());
         applicant.setPhone(applicantDTO.getPhone());
         applicant.setResumeUrl(applicantDTO.getResumeUrl());
+        applicant.setHired(applicantDTO.getHired());
+        applicant.setDeny(applicantDTO.getDeny());
         return applicant;
     }
 

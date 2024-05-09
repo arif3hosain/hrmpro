@@ -30,6 +30,12 @@ public class Applicant {
     @Column(nullable = false, length = 500)
     private String resumeUrl;
 
+    @Column
+    private Boolean hired;
+
+    @Column
+    private Boolean deny;
+
     public Long getId() {
         return id;
     }
@@ -78,4 +84,19 @@ public class Applicant {
         this.resumeUrl = resumeUrl;
     }
 
+    public Boolean getHired() {
+        return hired;
+    }
+
+    public void setHired(Boolean hired) {
+        this.hired = hired;
+    }
+
+    public Boolean getDeny() {
+        return deny;
+    }
+
+    public void setDeny(Boolean deny) {
+        this.deny = deny;
+    }
 }

@@ -1,5 +1,6 @@
 package com.hrm.hrmpro.controller;
 
+import com.hrm.hrmpro.domain.Applicant;
 import com.hrm.hrmpro.domain.Job;
 import com.hrm.hrmpro.domain.JobApplicant;
 import com.hrm.hrmpro.model.ApplicantDTO;
@@ -34,11 +35,11 @@ public class JobController {
     @Autowired
     private JobApplicantRepo jobApplicantRepo;
     @Autowired
-    private ApplicantRepository applicantRepository;
-    @Autowired
     private ApplicantService applicantService;
     @Autowired
     private JobApplicantService jobApplicantService;
+    @Autowired
+    private ApplicantRepository applicantRepository;
 
     public JobController(final JobService jobService) {
         this.jobService = jobService;
@@ -123,8 +124,36 @@ public class JobController {
         }
         JobApplicant application = new JobApplicant(applicantService.create(applicantDTO), jobRepository.getOne(applicantDTO.getJobId()));
         jobApplicantRepo.save(application);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("applicant.create.success"));
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Application has been successfully submitted"));
         return "redirect:/jobs/view/"+applicantDTO.getJobId();
     }
+
+    @GetMapping("/applicants/{id}")
+    public String applicants(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("job", jobService.get(id));
+        model.addAttribute("applicants", jobApplicantRepo.getAllByJobId(id));
+        return "job/applicants";
+    }
+
+    @GetMapping("/hire/{id}/{jobid}")
+    public String hire(@PathVariable("id") Long id, @PathVariable("jobid") Long jobid, final RedirectAttributes redirectAttributes) {
+        ApplicantDTO applicant = applicantService.get(id);
+        applicant.setHired(true);
+        applicantService.update(id, applicant);
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Applicant hired"));
+        return "redirect:/jobs/applicants/"+jobid;
+    }
+
+
+   @GetMapping("/deny/{id}/{jobid}")
+    public String deny(@PathVariable("id") Long id, @PathVariable("jobid") Long jobid, final RedirectAttributes redirectAttributes) {
+        ApplicantDTO applicant = applicantService.get(id);
+        applicant.setDeny(true);
+        applicantService.update(id, applicant);
+       redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Application has been denied"));
+        return "redirect:/jobs/applicants/"+jobid;
+    }
+
+
 
 }
