@@ -12,4 +12,14 @@ public class HomeController {
         return "home/index";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/access-denied")
+    public String denied(){
+        return "access-denied";
+    }
+
 }
