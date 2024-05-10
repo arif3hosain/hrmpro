@@ -23,6 +23,9 @@ public class User {
 
    private String password;
 
+   @OneToOne
+   private Employee employee;
+
    @ManyToMany(fetch = FetchType.EAGER, 
                    cascade = CascadeType.ALL)
    @JoinTable(name = "users_roles", 
@@ -46,6 +49,15 @@ public class User {
       this.email = email;
       this.password = password;
       this.roles = roles;
+   }
+
+   public Employee getEmployee() {
+      return employee;
+   }
+
+
+   public void setEmployee(Employee employee) {
+      this.employee = employee;
    }
 
    public Long getId() {

@@ -20,14 +20,17 @@ public class SecurityConfiguration {
 
    @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+       String [] defaultPath = {"/jobs", "/jobs/view/**", "/jobs/apply/**"};
        http
                .authorizeHttpRequests((requests) -> requests
-                       .requestMatchers("/jobs").hasRole("ADMIN")
+                       .requestMatchers(defaultPath).permitAll()
+                       .requestMatchers(defaultPath).permitAll()
+                       .requestMatchers("/webjars/bootstrap/**", "/webjars/flatpickr/**", "/css/**", "/js/**").permitAll()
                        .requestMatchers(
                                "/registration/**",
                                "/js/**",
                                "/css/**",
-                               "/img/**").permitAll()
+                               "/images/**").permitAll()
                        .anyRequest().authenticated()
                )
                .formLogin((form) -> form
@@ -44,6 +47,10 @@ public class SecurityConfiguration {
                        .clearAuthentication(true)
                        .permitAll()
                );
+
+
+
+
 
       return http.build();
    }

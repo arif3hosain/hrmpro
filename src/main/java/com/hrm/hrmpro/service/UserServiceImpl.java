@@ -5,7 +5,9 @@ package com.hrm.hrmpro.service;
 import com.hrm.hrmpro.domain.Role;
 import com.hrm.hrmpro.domain.User;
 import com.hrm.hrmpro.model.UserRegistrationDto;
+import com.hrm.hrmpro.repos.RoleRpo;
 import com.hrm.hrmpro.repos.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
    private UserRepository userRepository;
    private BCryptPasswordEncoder passwordEncoder;
 
+   @Autowired
+   private RoleRpo roleRpo;
+
    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
       super();
       this.userRepository = userRepository;
@@ -32,15 +37,18 @@ public class UserServiceImpl implements UserService {
 
    @Override
    public User save(UserRegistrationDto registrationDto) {
-      
+      Role role = new Role("ROLE_USER");
+      if(roleRpo.findAll().isEmpty()){
+         role = roleRpo.getRole();
+      }
+
+
       var user = new User(registrationDto.getFirstName(),
                  registrationDto.getLastName(), 
                   registrationDto.getEmail(),
                    passwordEncoder.encode(registrationDto
-                          .getPassword()), 
-                   Arrays.asList(new Role("ROLE_USER")));
-//                   Arrays.asList(new Role("ROLE_ADMIN")));
-
+                          .getPassword()),
+                   Arrays.asList(new Role("ROLE_ADMIN")));
       return userRepository.save(user);
    }
 

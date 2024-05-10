@@ -62,7 +62,6 @@ public class EmployeeController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id, final Model model) {
         EmployeeDTO dto = employeeService.get(id);
-        System.out.println(dto.toString());
         model.addAttribute("employee",dto );
         model.addAttribute("departments", departmentRepository.findAll());
         return "employee/edit";

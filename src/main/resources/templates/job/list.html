@@ -9,7 +9,7 @@
             <div class="d-flex flex-wrap mb-4">
                 <h5 class="flex-grow-1">Open Job List</h5>
                 <div>
-                    <a th:href="@{/jobs/add}" class="btn btn-primary ms-2">Post Job</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/add}" class="btn btn-primary ms-2">Post Job</a>
                 </div>
             </div>
             <div th:if="${jobs.empty}">[[#{job.list.empty}]]</div>
@@ -36,10 +36,10 @@
                             <td>[[${job.postedDate}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
-                                    <a th:href="@{/jobs/applicants/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">Applicants</a>
-                                    <a th:href="@{/jobs/edit/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{job.list.edit}]]</a>
+                                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/applicants/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">Applicants</a>
+                                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/edit/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{job.list.edit}]]</a>
                                     <a th:href="@{/jobs/view/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{button.view}]]</a>
-                                    <form th:action="@{/jobs/delete/{id}(id=${job.id})}"
+                                    <form sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/delete/{id}(id=${job.id})}"
                                             th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">[[#{job.list.delete}]]</button>
                                     </form>

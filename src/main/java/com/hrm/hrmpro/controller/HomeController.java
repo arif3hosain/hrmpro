@@ -21,7 +21,6 @@ public class HomeController {
     public String index(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user =  userRepository.findByEmail(auth.getName());
-        System.out.println(user.toString());
         request.getSession().setAttribute("user",user);
         return "home/index";
     }

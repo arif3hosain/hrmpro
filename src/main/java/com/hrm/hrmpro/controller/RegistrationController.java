@@ -37,8 +37,7 @@ public class RegistrationController {
       try {
          userService.save(registrationDto);
       }catch(Exception e)
-      {
-         System.out.println(e);
+      {e.printStackTrace();
          return "redirect:/registration?email_invalid";
       }
       return "redirect:/registration?success";

@@ -15,23 +15,23 @@
     <body>
         <header class="bg-light">
             <div class="container">
-                <nav class="navbar navbar-light navbar-expand-md">
-                  <!--  <a th:href="@{/}" class="navbar-brand">
+                <nav class="navbar navbar-inverse navbar-expand-md">
+                    <a th:href="@{/}" class="navbar-brand">
                         <img th:src="@{/images/logo.png}" th:alt="#{app.title}" width="30" height="30" class="d-inline-block align-top">
-                        <span class="ps-1">[[#{app.title}]]</span>
-                    </a>-->
+                        <span class="ps-1">Home</span>
+                    </a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
                             th:aria-label="#{navigation.toggle}" aria-controls="navbarToggle" aria-expanded="false">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div sec:authorize="isAuthenticated()" class="collapse navbar-collapse" id="navbarToggle">
                         <ul class="navbar-nav ms-auto">
-                            <li class="navbar-item">
-                                <a th:href="@{/}" class="nav-link">[[#{navigation.home}]]</a>
+                            <li sec:authorize="isAuthenticated()" class="navbar-item">
+                                <a th:href="@{/profile/edit/} + ${session.user.employee.id} " class="nav-link">Profile </a>
                             </li>
-                            <li class="navbar-item dropdown">
+                            <li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarEntitiesLink" role="button"
-                                        aria-expanded="false">[[#{navigation.entities}]]</a>
+                                        aria-expanded="false">Setting</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
                                     <li><a th:href="@{/employees}" class="dropdown-item">[[#{employee.list.headline}]]</a></li>
                                     <li><a th:href="@{/departments}" class="dropdown-item">[[#{department.list.headline}]]</a></li>
@@ -45,7 +45,7 @@
                                     <li><a th:href="@{/leaves}" class="dropdown-item">[[#{leave.list.headline}]]</a></li>
                                 </ul>
                             </li>
-                            <li class="navbar-item">
+                            <li sec:authorize="isAuthenticated()" class="navbar-item">
                                 <a  class="nav-link">Welcome, <span th:text="${session.user.firstName}"></span></a>
                             </li>
                             <li  sec:authorize="isAuthenticated()" class="navbar-item" >

@@ -2,6 +2,7 @@ package com.hrm.hrmpro.service;
 
 import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.model.EmployeeDTO;
+import com.hrm.hrmpro.model.UserRegistrationDto;
 import com.hrm.hrmpro.repos.DepartmentRepository;
 import com.hrm.hrmpro.repos.EmployeeRepository;
 import com.hrm.hrmpro.util.NotFoundException;
@@ -18,6 +19,8 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
+    @Autowired
+    private UserService userService;
 
     public EmployeeService(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -39,6 +42,7 @@ public class EmployeeService {
     public Long create(final EmployeeDTO employeeDTO) {
         final Employee employee = new Employee();
         mapToEntity(employeeDTO, employee);
+        userService.save(new UserRegistrationDto(employee.getFirstName(), employee.getLastName(), employee.getEmail(), "123456"));
         return employeeRepository.save(employee).getId();
     }
 
