@@ -7,17 +7,28 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{goal.edit.headline}]]</h1>
+                <h3 class="flex-grow-1">[[#{goal.edit.headline}]]</h3>
                 <div>
                     <a th:href="@{/goals}" class="btn btn-secondary">[[#{goal.edit.back}]]</a>
                 </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('goal')}" />
             <form th:action="${requestUri}" method="post">
-                <div th:replace="~{fragments/forms::inputRow(object='goal', field='id', disabled=true, type='number')}" />
+                <input name="id" th:value="${goal.id}" type="hidden" />
                 <div th:replace="~{fragments/forms::inputRow(object='goal', field='goalDescription')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='goal', field='targetDate', inputClass='js-datepicker')}" />
+                <div class="row mb-3">
+                    <label  class="col-md-2 col-form-label">
+                        <span>For Employee</span>
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control"   th:field="*{goal.employee}" name="validation-required" required="required">
+                            <option value="">Choose...</option>
+                            <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
+                        </select>
+                    </div>
+                </div>
                 <input type="submit" th:value="#{goal.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

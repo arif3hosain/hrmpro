@@ -1,5 +1,6 @@
 package com.hrm.hrmpro.model;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
@@ -7,12 +8,14 @@ public class BenefitDTO {
 
     private Long id;
 
+    @NotNull
     @Size(max = 100)
     private String name;
 
     @Size(max = 200)
     private String description;
 
+    @NotNull
     private Double amount;
 
     public Long getId() {

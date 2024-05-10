@@ -31,7 +31,6 @@ public class LeaveDTO {
     @Enumerated(EnumType.STRING)
     private LeaveStatus status;
 
-    @NotNull
     private Employee employee;
 
     @NotNull

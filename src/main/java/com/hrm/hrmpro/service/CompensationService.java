@@ -56,6 +56,7 @@ public class CompensationService {
         compensationDTO.setCommission(compensation.getCommission());
         compensationDTO.setAllowances(compensation.getAllowances());
         compensationDTO.setOvertimePay(compensation.getOvertimePay());
+        compensationDTO.setEmployee(compensation.getEmployee());
         return compensationDTO;
     }
 
@@ -66,6 +67,7 @@ public class CompensationService {
         compensation.setCommission(compensationDTO.getCommission());
         compensation.setAllowances(compensationDTO.getAllowances());
         compensation.setOvertimePay(compensationDTO.getOvertimePay());
+        compensation.setEmployee(compensationDTO.getEmployee());
         return compensation;
     }
 

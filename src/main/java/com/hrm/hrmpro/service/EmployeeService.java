@@ -65,6 +65,7 @@ public class EmployeeService {
         employeeDTO.setPhone(employee.getPhone());
         employeeDTO.setDepartment(employee.getDepartment());
         employeeDTO.setJoinDate(employee.getJoinDate());
+        employeeDTO.setDepartmentHead(employee.isDepartmentHead());
         return employeeDTO;
     }
 
@@ -75,6 +76,7 @@ public class EmployeeService {
         employee.setPhone(employeeDTO.getPhone());
         employee.setDepartment(departmentRepository.getOne(employeeDTO.getDepartment().getId()));
         employee.setJoinDate(employeeDTO.getJoinDate());
+        employee.setDepartmentHead(employeeDTO.isDepartmentHead());
         return employee;
     }
 

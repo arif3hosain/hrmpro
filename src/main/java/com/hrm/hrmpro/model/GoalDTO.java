@@ -1,5 +1,7 @@
 package com.hrm.hrmpro.model;
 
+import com.hrm.hrmpro.domain.Employee;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -14,6 +16,9 @@ public class GoalDTO {
     private Boolean completed;
 
     private LocalDate targetDate;
+
+    @NotNull
+    private Employee employee;
 
     public Long getId() {
         return id;
@@ -47,4 +52,11 @@ public class GoalDTO {
         this.targetDate = targetDate;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }

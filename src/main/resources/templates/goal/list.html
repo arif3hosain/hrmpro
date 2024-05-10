@@ -7,7 +7,7 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{goal.list.headline}]]</h1>
+                <h3 class="flex-grow-1">[[#{goal.list.headline}]]</h3>
                 <div>
                     <a th:href="@{/goals/add}" class="btn btn-primary ms-2">[[#{goal.list.createNew}]]</a>
                 </div>
@@ -21,6 +21,7 @@
                             <th scope="col">[[#{goal.goalDescription.label}]]</th>
                             <th scope="col">[[#{goal.completed.label}]]</th>
                             <th scope="col">[[#{goal.targetDate.label}]]</th>
+                            <th scope="col">Employee</th>
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                             <td>[[${goal.goalDescription}]]</td>
                             <td>[[${goal.completed}]]</td>
                             <td>[[${goal.targetDate}]]</td>
+                            <td>[[${goal.employee.firstName}]] [[${goal.employee.lastName}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/goals/edit/{id}(id=${goal.id})}" class="btn btn-sm btn-secondary">[[#{goal.list.edit}]]</a>

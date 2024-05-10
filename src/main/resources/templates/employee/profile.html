@@ -8,9 +8,6 @@
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
                 <h4 class="flex-grow-1">[[#{employee.edit.headline}]]</h4>
-                <div>
-                    <a th:href="@{/employees}" class="btn btn-secondary">[[#{employee.edit.back}]]</a>
-                </div>
             </div>
             <div th:replace="~{fragments/forms::globalErrors('employee')}" />
             <form th:action="${requestUri}" method="post">

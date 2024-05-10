@@ -23,6 +23,7 @@
                             <th scope="col">[[#{compensation.commission.label}]]</th>
                             <th scope="col">[[#{compensation.allowances.label}]]</th>
                             <th scope="col">[[#{compensation.overtimePay.label}]]</th>
+                            <th scope="col">Employee</th>
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <td>[[${compensation.commission}]]</td>
                             <td>[[${compensation.allowances}]]</td>
                             <td>[[${compensation.overtimePay}]]</td>
+                            <td>[[${compensation.employee.firstName}]] [[${compensation.employee.lastName}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/compensations/edit/{id}(id=${compensation.id})}" class="btn btn-sm btn-secondary">[[#{compensation.list.edit}]]</a>

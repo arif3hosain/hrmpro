@@ -39,9 +39,9 @@
                                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/applicants/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">Applicants</a>
                                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/edit/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{job.list.edit}]]</a>
                                     <a th:href="@{/jobs/view/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{button.view}]]</a>
-                                    <form sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/delete/{id}(id=${job.id})}"
-                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
-                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{job.list.delete}]]</button>
+                                    <form  sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/delete/{id}(id=${job.id})}"
+                                          th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{applicant.list.delete}]]</button>
                                     </form>
                                 </div>
                             </td>

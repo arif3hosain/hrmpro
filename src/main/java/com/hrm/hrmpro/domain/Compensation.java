@@ -1,10 +1,6 @@
 package com.hrm.hrmpro.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -29,6 +25,10 @@ public class Compensation {
 
     @Column
     private Double overtimePay;
+
+    @ManyToOne
+    @JoinColumn(name = "employee", referencedColumnName = "id")
+    private Employee employee;
 
     public Long getId() {
         return id;
@@ -78,4 +78,11 @@ public class Compensation {
         this.overtimePay = overtimePay;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }

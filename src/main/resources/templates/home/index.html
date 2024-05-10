@@ -15,6 +15,8 @@
                     <a  sec:authorize="hasAnyRole('ROLE_HR')"  th:href="@{/profile/edit/} + ${session.user.employee.id} " class="list-group-item list-group-item-action">Profile</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/employees}" class="list-group-item list-group-item-action">[[#{employee.list.headline}]]</a>
                     <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs}" class="list-group-item list-group-item-action">[[#{job.list.headline}]]</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/leaves}" class="list-group-item list-group-item-action">[[#{leave.list.headline}]]</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
                    <!-- <a th:href="@{/departments}" class="list-group-item list-group-item-action">[[#{department.list.headline}]]</a>
                     <a th:href="@{/goals}" class="list-group-item list-group-item-action">[[#{goal.list.headline}]]</a>
                     <a th:href="@{/performanceReviews}" class="list-group-item list-group-item-action">[[#{performanceReview.list.headline}]]</a>

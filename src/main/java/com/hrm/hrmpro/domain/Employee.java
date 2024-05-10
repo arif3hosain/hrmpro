@@ -25,6 +25,8 @@ public class Employee {
     @Column(nullable = false, length = 20)
     private String phone;
 
+    private boolean departmentHead;
+
     @ManyToOne
     @JoinColumn(name = "department", referencedColumnName = "id")
     private Department department;
@@ -42,6 +44,14 @@ public class Employee {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public boolean isDepartmentHead() {
+        return departmentHead;
+    }
+
+    public void setDepartmentHead(boolean departmentHead) {
+        this.departmentHead = departmentHead;
     }
 
     public void setFirstName(final String firstName) {

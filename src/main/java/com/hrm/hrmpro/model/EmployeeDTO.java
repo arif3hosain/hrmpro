@@ -36,7 +36,7 @@ public class EmployeeDTO {
     @NotNull
     private LocalDate joinDate;
 
-
+    private boolean departmentHead;
 
     public Long getId() {
         return id;
@@ -68,6 +68,14 @@ public class EmployeeDTO {
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    public boolean isDepartmentHead() {
+        return departmentHead;
+    }
+
+    public void setDepartmentHead(boolean departmentHead) {
+        this.departmentHead = departmentHead;
     }
 
     public String getPhone() {

@@ -19,6 +19,17 @@
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='commission')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='allowances')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='overtimePay')}" />
+                <div class="row mb-3">
+                    <label  class="col-md-2 col-form-label">
+                        <span>For Employee</span>
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control"   th:field="*{compensation.employee}" name="validation-required" required="required">
+                            <option value="">Choose...</option>
+                            <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
+                        </select>
+                    </div>
+                </div>
                 <input type="submit" th:value="#{compensation.add.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

@@ -1,9 +1,11 @@
 package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.model.GoalDTO;
+import com.hrm.hrmpro.repos.EmployeeRepository;
 import com.hrm.hrmpro.service.GoalService;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/goals")
 public class GoalController {
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
     private final GoalService goalService;
 
     public GoalController(final GoalService goalService) {
@@ -32,14 +36,16 @@ public class GoalController {
     }
 
     @GetMapping("/add")
-    public String add(@ModelAttribute("goal") final GoalDTO goalDTO) {
+    public String add(@ModelAttribute("goal") final GoalDTO goalDTO, Model model) {
+        model.addAttribute("emps", employeeRepository.findAll());
         return "goal/add";
     }
 
     @PostMapping("/add")
     public String add(@ModelAttribute("goal") @Valid final GoalDTO goalDTO,
-            final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+            final BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("emps", employeeRepository.findAll());
             return "goal/add";
         }
         goalService.create(goalDTO);
@@ -49,6 +55,7 @@ public class GoalController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id, final Model model) {
+        model.addAttribute("emps", employeeRepository.findAll());
         model.addAttribute("goal", goalService.get(id));
         return "goal/edit";
     }
@@ -56,8 +63,9 @@ public class GoalController {
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id,
             @ModelAttribute("goal") @Valid final GoalDTO goalDTO, final BindingResult bindingResult,
-            final RedirectAttributes redirectAttributes) {
+            final RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("emps", employeeRepository.findAll());
             return "goal/edit";
         }
         goalService.update(id, goalDTO);

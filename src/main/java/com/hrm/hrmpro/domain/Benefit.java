@@ -15,13 +15,13 @@ public class Benefit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "\"description\"", length = 200)
+    @Column(name = "description", length = 200)
     private String description;
 
-    @Column
+    @Column(nullable = false)
     private Double amount;
 
     public Long getId() {

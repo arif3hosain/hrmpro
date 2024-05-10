@@ -3,6 +3,7 @@ package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.model.LeaveDTO;
 import com.hrm.hrmpro.service.LeaveService;
+import com.hrm.hrmpro.util.LeaveStatus;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class LeaveController {
         model.addAttribute("leaves", leaveService.findAll());
         return "leave/list";
     }
+
 
     @GetMapping("/add")
     public String add(@ModelAttribute("leave") final LeaveDTO leaveDTO) {
@@ -70,6 +72,26 @@ public class LeaveController {
                          final RedirectAttributes redirectAttributes) {
         leaveService.delete(id);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("leave.delete.success"));
+        return "redirect:/leaves";
+    }
+
+    @PostMapping("/approve/{id}")
+    public String approve(@PathVariable(name = "id") final Long id,
+                         final RedirectAttributes redirectAttributes) {
+        LeaveDTO dto =  leaveService.get(id);
+        dto.setStatus(LeaveStatus.APPROVED);
+        leaveService.update(id, dto );
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("Leave approved."));
+        return "redirect:/leaves";
+    }
+
+    @PostMapping("/reject/{id}")
+    public String cancel(@PathVariable(name = "id") final Long id,
+                         final RedirectAttributes redirectAttributes) {
+        LeaveDTO dto =  leaveService.get(id);
+        dto.setStatus(LeaveStatus.REJECTED);
+        leaveService.update(id, dto );
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("Leave rejected."));
         return "redirect:/leaves";
     }
 

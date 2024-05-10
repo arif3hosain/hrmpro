@@ -53,6 +53,7 @@ public class GoalService {
         goalDTO.setGoalDescription(goal.getGoalDescription());
         goalDTO.setCompleted(goal.getCompleted());
         goalDTO.setTargetDate(goal.getTargetDate());
+        goalDTO.setEmployee(goal.getEmployee());
         return goalDTO;
     }
 
@@ -60,6 +61,7 @@ public class GoalService {
         goal.setGoalDescription(goalDTO.getGoalDescription());
         goal.setCompleted(goalDTO.getCompleted());
         goal.setTargetDate(goalDTO.getTargetDate());
+        goal.setEmployee(goalDTO.getEmployee());
         return goal;
     }
 
