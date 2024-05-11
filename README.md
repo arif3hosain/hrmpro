@@ -1,4 +1,4 @@
-# Its a university project
+# Its ongoing project
 
 Development of a human resources management platform:
 - Creation of an employee management system, including personal information, schedules, leave, etc.
@@ -15,9 +15,25 @@ Technologies to use:
 Spring boot (spring data jpa, spring validation, spring security, spring MVC with thymeleaf as a template engine)
 DBMS: MySQL
 
-IDE: eclipse
+## Development Tool
+- Eclipse
+- IntellIJ IDEA
 
 #Hrmpro
+
+
+## Tools
+
+- MySQL
+- Jakarta EE
+- Spring Bot
+- Spring MVC
+- Thymeleaf
+- Hibernate
+- Spring JPA
+- Apache Maven
+- J2EE
+- Java 21
 
 ## Development
 
