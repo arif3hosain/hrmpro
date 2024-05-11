@@ -1,10 +1,8 @@
 package com.hrm.hrmpro.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.hrm.hrmpro.util.Performance;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 
@@ -21,6 +19,10 @@ public class PerformanceReview {
 
     @Column
     private LocalDate reviewDate;
+    @ManyToOne
+    private Employee employee;
+    @Enumerated(EnumType.STRING)
+    private Performance performance;
 
     public Long getId() {
         return id;
@@ -46,4 +48,19 @@ public class PerformanceReview {
         this.reviewDate = reviewDate;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Performance getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Performance performance) {
+        this.performance = performance;
+    }
 }

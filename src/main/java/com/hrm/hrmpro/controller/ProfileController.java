@@ -39,7 +39,6 @@ public class ProfileController {
     public String edit(@PathVariable(name = "id") final Long id,
                        @ModelAttribute("employee") @Valid final EmployeeDTO employeeDTO,
                        final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
-        System.out.println("................."+id);
         if (bindingResult.hasErrors()) {
             return "employee/profile";
         }

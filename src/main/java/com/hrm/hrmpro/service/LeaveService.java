@@ -1,6 +1,8 @@
 package com.hrm.hrmpro.service;
 
 
+import com.hrm.hrmpro.domain.Department;
+import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.domain.Leave;
 import com.hrm.hrmpro.model.LeaveDTO;
 import com.hrm.hrmpro.repos.LeaveRepository;

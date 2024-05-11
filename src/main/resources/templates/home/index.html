@@ -12,20 +12,25 @@
             <div class="col-md-4 mb-5">
                 <h4 class="mb-3">Browse Link</h4>
                 <div class="list-group">
-                    <a  sec:authorize="hasAnyRole('ROLE_HR')"  th:href="@{/profile/edit/} + ${session.user.employee.id} " class="list-group-item list-group-item-action">Profile</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_HR', 'ROLE_USER','ROLE_ADMIN')"  th:href="@{/profile/edit/} + ${session.user.employee.id} " class="list-group-item list-group-item-action">Profile</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/employees}" class="list-group-item list-group-item-action">[[#{employee.list.headline}]]</a>
-                    <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs}" class="list-group-item list-group-item-action">[[#{job.list.headline}]]</a>
-                    <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/leaves}" class="list-group-item list-group-item-action">[[#{leave.list.headline}]]</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_HR','ROLE_ADMIN')" th:href="@{/jobs}" class="list-group-item list-group-item-action">[[#{job.list.headline}]]</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_USER','ROLE_HR','ROLE_ADMIN')" th:href="@{/leaves}" class="list-group-item list-group-item-action">[[#{leave.list.headline}]]</a>
                     <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
-                   <!-- <a th:href="@{/departments}" class="list-group-item list-group-item-action">[[#{department.list.headline}]]</a>
-                    <a th:href="@{/goals}" class="list-group-item list-group-item-action">[[#{goal.list.headline}]]</a>
-                    <a th:href="@{/performanceReviews}" class="list-group-item list-group-item-action">[[#{performanceReview.list.headline}]]</a>
-                    <a th:href="@{/benefits}" class="list-group-item list-group-item-action">[[#{benefit.list.headline}]]</a>
-                    <a th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
-                    <a th:href="@{/payrolls}" class="list-group-item list-group-item-action">[[#{payroll.list.headline}]]</a>
-
-                    <a th:href="@{/applicants}" class="list-group-item list-group-item-action">[[#{applicant.list.headline}]]</a>-->
+                    <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_USER')" th:href="@{/goals}" class="list-group-item list-group-item-action">[[#{goal.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/departments}" class="list-group-item list-group-item-action">[[#{department.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/applicants}" class="list-group-item list-group-item-action">[[#{applicant.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/benefits}" class="list-group-item list-group-item-action">[[#{benefit.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/performanceReviews}" class="list-group-item list-group-item-action">[[#{performanceReview.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
                 </div>
+            </div>
+            <h5>Your Authorities</h5>
+            <!-- Check if the user is authenticated -->
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <!-- Get the authorities and iterate over them -->
+                [<span th:each="authority, iterStat : ${#authentication.getAuthorities()}"
+                       th:text="${authority.authority} + ${iterStat.last ? '' : ', '}"></span>]
             </div>
         </div>
     </body>

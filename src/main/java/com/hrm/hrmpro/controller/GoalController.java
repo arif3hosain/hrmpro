@@ -2,10 +2,15 @@ package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.model.GoalDTO;
 import com.hrm.hrmpro.repos.EmployeeRepository;
+import com.hrm.hrmpro.repos.GoalRepository;
 import com.hrm.hrmpro.service.GoalService;
+import com.hrm.hrmpro.service.SecurityService;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +28,10 @@ public class GoalController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private GoalRepository goalRepository;
+    @Autowired
+    private SecurityService securityService;
     private final GoalService goalService;
 
     public GoalController(final GoalService goalService) {
@@ -31,13 +40,44 @@ public class GoalController {
 
     @GetMapping
     public String list(final Model model) {
-        model.addAttribute("goals", goalService.findAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isHR = false;
+        if (auth != null) {
+            for (GrantedAuthority authority : auth.getAuthorities()) {
+                if ("ROLE_HR".equals(authority.getAuthority())) {
+                    model.addAttribute("goals", goalService.findAll());
+                    isHR = true;
+                }
+            }
+        }
+       if(!isHR){
+           if(securityService.getEmp().isDepartmentHead() ){
+               model.addAttribute("goals", goalRepository.findAllByEmployeeDepartmentId(securityService.getEmp().getDepartment().getId()));
+           }else {
+               model.addAttribute("goals", goalRepository.findAllByEmployeeId(securityService.getEmp().getId()));
+           }
+       }
         return "goal/list";
     }
 
     @GetMapping("/add")
     public String add(@ModelAttribute("goal") final GoalDTO goalDTO, Model model) {
-        model.addAttribute("emps", employeeRepository.findAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isHR = false;
+        if (auth != null) {
+            for (GrantedAuthority authority : auth.getAuthorities()) {
+                if ("ROLE_HR".equals(authority.getAuthority())) {
+                    model.addAttribute("emps", employeeRepository.findAll());
+                    isHR = true;
+                }
+            }
+        }
+        if(!isHR){
+            if(securityService.getEmp().isDepartmentHead() ){
+                model.addAttribute("emps", employeeRepository.findAllByDepartmentId(securityService.getEmp().getDepartment().getId()));
+            }
+        }
+
         return "goal/add";
     }
 
@@ -55,7 +95,21 @@ public class GoalController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id, final Model model) {
-        model.addAttribute("emps", employeeRepository.findAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isHR = false;
+        if (auth != null) {
+            for (GrantedAuthority authority : auth.getAuthorities()) {
+                if ("ROLE_HR".equals(authority.getAuthority())) {
+                    model.addAttribute("emps", employeeRepository.findAll());
+                    isHR = true;
+                }
+            }
+        }
+        if(!isHR){
+            if(securityService.getEmp().isDepartmentHead() ){
+                model.addAttribute("emps", employeeRepository.findAllByDepartmentId(securityService.getEmp().getDepartment().getId()));
+            }
+        }
         model.addAttribute("goal", goalService.get(id));
         return "goal/edit";
     }

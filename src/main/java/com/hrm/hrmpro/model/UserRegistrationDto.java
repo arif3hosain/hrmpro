@@ -1,21 +1,25 @@
 package com.hrm.hrmpro.model;
 
+import com.hrm.hrmpro.domain.Employee;
+
 public class UserRegistrationDto {
 
    private String firstName;
    private String lastName;
    private String email;
    private String password;
+   private Employee employee;
 
    public UserRegistrationDto() {
 
    }
 
-   public UserRegistrationDto(String firstName, String lastName, String email, String password) {
+   public UserRegistrationDto(String firstName, String lastName, String email, String password, Employee employee) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.password = password;
+      this.employee = employee;
    }
 
    public String getFirstName() {
@@ -48,5 +52,13 @@ public class UserRegistrationDto {
 
    public void setPassword(String password) {
       this.password = password;
+   }
+
+   public Employee getEmployee() {
+      return employee;
+   }
+
+   public void setEmployee(Employee employee) {
+      this.employee = employee;
    }
 }

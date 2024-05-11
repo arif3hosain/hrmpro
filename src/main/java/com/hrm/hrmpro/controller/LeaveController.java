@@ -1,11 +1,18 @@
 package com.hrm.hrmpro.controller;
 
 
+import com.hrm.hrmpro.domain.Department;
+import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.model.LeaveDTO;
+import com.hrm.hrmpro.repos.LeaveRepository;
 import com.hrm.hrmpro.service.LeaveService;
+import com.hrm.hrmpro.service.SecurityService;
 import com.hrm.hrmpro.util.LeaveStatus;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +23,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/leaves")
 public class LeaveController {
 
     private final LeaveService leaveService;
+    @Autowired
+    private LeaveRepository leaveRepository;
+    @Autowired
+    private SecurityService securityService;
 
     public LeaveController(final LeaveService leaveService) {
         this.leaveService = leaveService;
@@ -28,7 +41,12 @@ public class LeaveController {
 
     @GetMapping
     public String list(final Model model) {
-        model.addAttribute("leaves", leaveService.findAll());
+        if(securityService.getEmp().isDepartmentHead() ){
+            model.addAttribute("leaves", leaveRepository.findAllByEmployeeDepartmentId(securityService.getEmp().getDepartment().getId()));
+        }else {
+            model.addAttribute("leaves", leaveRepository.findAllByEmployeeId(securityService.getEmp().getId()));
+        }
+        model.addAttribute("head", securityService.getEmp().isDepartmentHead());
         return "leave/list";
     }
 
@@ -42,6 +60,12 @@ public class LeaveController {
     public String add(@ModelAttribute("leave") @Valid final LeaveDTO leaveDTO,
                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            return "leave/add";
+        }
+        Employee employee = securityService.getEmp();
+        Department dept = employee.getDepartment();
+        if(leaveRepository.getLeave(leaveDTO.getStartDate(),dept.getId() ) != null ){
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("A leave request posted on this date, try different date."));
             return "leave/add";
         }
         leaveService.create(leaveDTO);

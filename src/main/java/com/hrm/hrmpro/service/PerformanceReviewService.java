@@ -4,6 +4,8 @@ import com.hrm.hrmpro.domain.PerformanceReview;
 import com.hrm.hrmpro.model.PerformanceReviewDTO;
 import com.hrm.hrmpro.repos.PerformanceReviewRepository;
 import com.hrm.hrmpro.util.NotFoundException;
+
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class PerformanceReviewService {
     public Long create(final PerformanceReviewDTO performanceReviewDTO) {
         final PerformanceReview performanceReview = new PerformanceReview();
         mapToEntity(performanceReviewDTO, performanceReview);
+        performanceReview.setReviewDate(LocalDate.now());
         return performanceReviewRepository.save(performanceReview).getId();
     }
 
@@ -52,6 +55,8 @@ public class PerformanceReviewService {
             final PerformanceReviewDTO performanceReviewDTO) {
         performanceReviewDTO.setId(performanceReview.getId());
         performanceReviewDTO.setReviewText(performanceReview.getReviewText());
+        performanceReviewDTO.setPerformance(performanceReview.getPerformance());
+        performanceReviewDTO.setEmployee(performanceReview.getEmployee());
         performanceReviewDTO.setReviewDate(performanceReview.getReviewDate());
         return performanceReviewDTO;
     }
@@ -59,7 +64,8 @@ public class PerformanceReviewService {
     private PerformanceReview mapToEntity(final PerformanceReviewDTO performanceReviewDTO,
             final PerformanceReview performanceReview) {
         performanceReview.setReviewText(performanceReviewDTO.getReviewText());
-        performanceReview.setReviewDate(performanceReviewDTO.getReviewDate());
+        performanceReview.setPerformance(performanceReviewDTO.getPerformance());
+        performanceReview.setEmployee(performanceReviewDTO.getEmployee());
         return performanceReview;
     }
 

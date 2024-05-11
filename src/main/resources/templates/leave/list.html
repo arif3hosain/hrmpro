@@ -37,13 +37,13 @@
                 <td>
                     <div class="float-end text-nowrap">
                         <a th:if="${leave.status == leave.status.PENDING}" th:href="@{/leaves/edit/{id}(id=${leave.id})}" class="btn btn-sm btn-secondary">[[#{leave.list.edit}]]</a>
-                        <form th:if="${leave.status == 'PENDING'}"  th:action="@{/leaves/approve/{id}(id=${leave.id})}"
+                        <form th:if="${leave.status == leave.status.PENDING && head }"  th:action="@{/leaves/approve/{id}(id=${leave.id})}"
                               th:data-confirm-message="'Do you want to approve ?'" method="post" class="js-submit-confirm d-inline">
                             <button type="submit" class="btn btn-sm btn-secondary">Approve</button>
                         </form>
-                        <form th:if="${leave.status == leave.status.PENDING}" th:action="@{/leaves/reject/{id}(id=${leave.id})}"
-                              th:data-confirm-message="'Do you want to reject ?'" method="post" class="js-submit-confirm d-inline">
-                            <button type="submit" class="btn btn-sm btn-secondary">Reject</button>
+                        <form th:if="${leave.status == leave.status.PENDING && head}" th:action="@{/leaves/reject/{id}(id=${leave.id})}"
+                              th:data-confirm-message="'Do you want to cancel ?'" method="post" class="js-submit-confirm d-inline">
+                            <button type="submit" class="btn btn-sm btn-secondary">Cancel</button>
                         </form>
                         <button th:if="${leave.status == leave.status.APPROVED}" type="submit" class="btn btn-sm btn-success">Approved</button>
                         <button th:if="${leave.status == leave.status.REJECTED}" type="submit" class="btn btn-sm btn-warning">Cancelled</button>

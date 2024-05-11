@@ -7,7 +7,7 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{performanceReview.edit.headline}]]</h1>
+                <h4 class="flex-grow-1">[[#{performanceReview.edit.headline}]]</h4>
                 <div>
                     <a th:href="@{/performanceReviews}" class="btn btn-secondary">[[#{performanceReview.edit.back}]]</a>
                 </div>
@@ -16,7 +16,18 @@
             <form th:action="${requestUri}" method="post">
                 <div th:replace="~{fragments/forms::inputRow(object='performanceReview', field='id', disabled=true, type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='performanceReview', field='reviewText')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='performanceReview', field='reviewDate', inputClass='js-datepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='', field='reviewDate', inputClass='js-datepicker')}" />
+                <div class="row mb-3">performanceReview
+                    <label  class="col-md-2 col-form-label">
+                        <span>For Employee</span>
+                    </label>
+                    <div class="col-md-10">
+                        <select class="form-control"   th:field="*{performanceReview.employee}" name="validation-required" required="required">
+                            <option value="">Choose...</option>
+                            <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
+                        </select>
+                    </div>
+                </div>
                 <input type="submit" th:value="#{performanceReview.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

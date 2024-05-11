@@ -7,7 +7,7 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{performanceReview.list.headline}]]</h1>
+                <h4 class="flex-grow-1">[[#{performanceReview.list.headline}]]</h4>
                 <div>
                     <a th:href="@{/performanceReviews/add}" class="btn btn-primary ms-2">[[#{performanceReview.list.createNew}]]</a>
                 </div>
@@ -20,6 +20,8 @@
                             <th scope="col">[[#{performanceReview.id.label}]]</th>
                             <th scope="col">[[#{performanceReview.reviewText.label}]]</th>
                             <th scope="col">[[#{performanceReview.reviewDate.label}]]</th>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Performance</th>
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -28,6 +30,8 @@
                             <td>[[${performanceReview.id}]]</td>
                             <td>[[${performanceReview.reviewText}]]</td>
                             <td>[[${performanceReview.reviewDate}]]</td>
+                            <td>[[${performanceReview.employee.firstName}]] [[${performanceReview.employee.lastName}]]</td>
+                            <td>[[${performanceReview.performance}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/performanceReviews/edit/{id}(id=${performanceReview.id})}" class="btn btn-sm btn-secondary">[[#{performanceReview.list.edit}]]</a>

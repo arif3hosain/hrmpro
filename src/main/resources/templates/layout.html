@@ -27,9 +27,9 @@
                     <div sec:authorize="isAuthenticated()" class="collapse navbar-collapse" id="navbarToggle">
                         <ul class="navbar-nav ms-auto">
                             <li sec:authorize="isAuthenticated()" class="navbar-item">
-                                <a th:href="@{/profile/edit/} + ${session.user.employee.id} " class="nav-link">Profile </a>
+                                <a  style="color: dodgerblue; font-weight: bold;" th:href="@{/profile/edit/} + ${session.user.employee.id} " class="nav-link">Profile </a>
                             </li>
-                            <li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
+                            <!--<li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarEntitiesLink" role="button"
                                         aria-expanded="false">Setting</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
@@ -39,12 +39,11 @@
                                     <li><a th:href="@{/performanceReviews}" class="dropdown-item">[[#{performanceReview.list.headline}]]</a></li>
                                     <li><a th:href="@{/benefits}" class="dropdown-item">[[#{benefit.list.headline}]]</a></li>
                                     <li><a th:href="@{/compensations}" class="dropdown-item">[[#{compensation.list.headline}]]</a></li>
-                                    <li><a th:href="@{/payrolls}" class="dropdown-item">[[#{payroll.list.headline}]]</a></li>
                                     <li><a th:href="@{/jobs}" class="dropdown-item">[[#{job.list.headline}]]</a></li>
                                     <li><a th:href="@{/applicants}" class="dropdown-item">[[#{applicant.list.headline}]]</a></li>
                                     <li><a th:href="@{/leaves}" class="dropdown-item">[[#{leave.list.headline}]]</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li sec:authorize="isAuthenticated()" class="navbar-item">
                                 <a  class="nav-link">Welcome, <span th:text="${session.user.firstName}"></span></a>
                             </li>
@@ -64,5 +63,6 @@
                 <div layout:fragment="content" />
             </div>
         </main>
+
     </body>
 </html>

@@ -14,6 +14,7 @@
     </div>
     <div th:replace="~{fragments/forms::globalErrors('leave')}" />
     <form th:action="${requestUri}" method="post">
+        <span style="font-size: 12px;">Leave request will not be allowed if another request is already placed on same date from same department.</span>
         <div th:replace="~{fragments/forms::inputRow(object='leave', field='startDate', required=true, inputClass='js-datepicker')}" />
         <div th:replace="~{fragments/forms::inputRow(object='leave', field='endDate', required=true, inputClass='js-datepicker')}" />
         <div th:replace="~{fragments/forms::inputRow(object='leave', field='reason', required=true, type='textarea')}" />

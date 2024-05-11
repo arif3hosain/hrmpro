@@ -35,7 +35,8 @@
                             <td>[[${employee.email}]]</td>
                             <td>[[${employee.phone}]]</td>
                             <td>[[${employee.joinDate}]]</td>
-                            <td>[[${employee.department.name}]]</td>
+                            <td th:if="${employee.departmentHead}">[[${employee.department.name}]] (Head)</td>
+                            <td th:if="${!employee.departmentHead}">[[${employee.department.name}]]</td>
 
                             <td>
                                 <div class="float-end text-nowrap">
