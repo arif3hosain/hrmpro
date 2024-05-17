@@ -51,7 +51,6 @@ public class CompensationService {
     private CompensationDTO mapToDTO(final Compensation compensation,
             final CompensationDTO compensationDTO) {
         compensationDTO.setId(compensation.getId());
-        compensationDTO.setBaseSalary(compensation.getBaseSalary());
         compensationDTO.setBonus(compensation.getBonus());
         compensationDTO.setCommission(compensation.getCommission());
         compensationDTO.setAllowances(compensation.getAllowances());
@@ -62,7 +61,6 @@ public class CompensationService {
 
     private Compensation mapToEntity(final CompensationDTO compensationDTO,
             final Compensation compensation) {
-        compensation.setBaseSalary(compensationDTO.getBaseSalary());
         compensation.setBonus(compensationDTO.getBonus());
         compensation.setCommission(compensationDTO.getCommission());
         compensation.setAllowances(compensationDTO.getAllowances());

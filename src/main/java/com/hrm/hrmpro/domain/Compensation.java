@@ -11,8 +11,6 @@ public class Compensation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private Double baseSalary;
 
     @Column
     private Double bonus;
@@ -36,14 +34,6 @@ public class Compensation {
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-    public Double getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(final Double baseSalary) {
-        this.baseSalary = baseSalary;
     }
 
     public Double getBonus() {

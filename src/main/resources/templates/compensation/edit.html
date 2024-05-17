@@ -15,7 +15,6 @@
             <div th:replace="~{fragments/forms::globalErrors('compensation')}" />
             <form th:action="${requestUri}" method="post">
                 <input name="id" th:value="${compensation.id}" type="hidden" />
-                <div th:replace="~{fragments/forms::inputRow(object='compensation', field='baseSalary')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='bonus')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='commission')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='compensation', field='allowances')}" />

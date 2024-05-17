@@ -7,8 +7,6 @@ import jakarta.validation.constraints.NotNull;
 public class CompensationDTO {
 
     private Long id;
-    @NotNull
-    private Double baseSalary;
     private Double bonus;
     private Double commission;
     private Double allowances;
@@ -23,13 +21,6 @@ public class CompensationDTO {
         this.id = id;
     }
 
-    public Double getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(final Double baseSalary) {
-        this.baseSalary = baseSalary;
-    }
 
     public Double getBonus() {
         return bonus;

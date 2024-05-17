@@ -18,7 +18,6 @@
                     <thead>
                         <tr>
                             <th scope="col">[[#{compensation.id.label}]]</th>
-                            <th scope="col">[[#{compensation.baseSalary.label}]]</th>
                             <th scope="col">[[#{compensation.bonus.label}]]</th>
                             <th scope="col">[[#{compensation.commission.label}]]</th>
                             <th scope="col">[[#{compensation.allowances.label}]]</th>
@@ -30,7 +29,6 @@
                     <tbody>
                         <tr th:each="compensation : ${compensations}">
                             <td>[[${compensation.id}]]</td>
-                            <td>[[${compensation.baseSalary}]]</td>
                             <td>[[${compensation.bonus}]]</td>
                             <td>[[${compensation.commission}]]</td>
                             <td>[[${compensation.allowances}]]</td>

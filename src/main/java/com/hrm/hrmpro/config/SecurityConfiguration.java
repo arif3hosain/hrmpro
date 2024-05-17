@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                .authorizeHttpRequests((requests) -> requests
                        .requestMatchers(defaultPath).permitAll()
                        .requestMatchers(defaultPath).permitAll()
+//                       .requestMatchers("/compensations/add").hasAnyRole("ROLE_HR")
                        .requestMatchers("/webjars/bootstrap/**", "/webjars/flatpickr/**", "/css/**", "/js/**").permitAll()
                        .requestMatchers(
                                "/registration/**",
