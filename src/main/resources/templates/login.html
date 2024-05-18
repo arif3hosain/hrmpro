@@ -10,45 +10,23 @@
 <body>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Welcome to HRM Application</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/jobs}">Jobs</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Signup
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Signup as Admin</a></li>
-                        <li><a class="dropdown-item" href="#">Signup as HR</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/section :: default-nav"/>
 
 <!-- Registration Form -->
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">User Signup</div>
+                <div class="card-header">System Login</div>
                 <div class="card-body">
                     <!-- Form -->
                     <form th:action="@{/login}" method="post">
                         <div th:if="${param.error}">
                             <div class="alert alert-danger">Invalid username or
                                 password.</div>
+                        </div>
+                        <div th:if="${param.reset}">
+                            <div class="alert alert-success">Password has been updated.</div>
                         </div>
 
                         <div th:if="${param.logout}">
@@ -68,9 +46,9 @@
                                    class="form-control" placeholder="Enter Password" />
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <span>New user? <a href="/" th:href="@{/registration}">
-                  Register
-                    here</a></span>
+
+                        <span>Forget Password? <a  th:href="@{/send-mail}">Reset Password</a></span>
+                        <span>New user? <a th:href="@{/registration}">Register</a></span>
                     </form>
                 </div>
             </div>

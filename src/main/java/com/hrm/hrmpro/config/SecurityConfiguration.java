@@ -21,10 +21,9 @@ public class SecurityConfiguration {
 
    @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-       String [] defaultPath = {"/jobs", "/jobs/view/**", "/jobs/apply/**"};
+       String [] defaultPath = {"/jobs", "/jobs/view/**", "/jobs/apply/**", "/send-mail", "/reset-password/**", "/login/**"};
        http
                .authorizeHttpRequests((requests) -> requests
-                       .requestMatchers(defaultPath).permitAll()
                        .requestMatchers(defaultPath).permitAll()
 //                       .requestMatchers("/compensations/add").hasAnyRole("ROLE_HR")
                        .requestMatchers("/webjars/bootstrap/**", "/webjars/flatpickr/**", "/css/**", "/js/**").permitAll()
