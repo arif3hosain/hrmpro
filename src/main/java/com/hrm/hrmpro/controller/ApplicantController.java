@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping("/applicants")
 public class ApplicantController {
@@ -25,11 +24,13 @@ public class ApplicantController {
         this.applicantService = applicantService;
     }
 
+
     @GetMapping
     public String list(final Model model) {
         model.addAttribute("applicants", applicantService.findAll());
         return "applicant/list";
     }
+
 
     @GetMapping("/add")
     public String add(@ModelAttribute("applicant") final ApplicantDTO applicantDTO) {

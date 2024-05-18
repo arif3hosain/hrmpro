@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
    @Override
    public User save(UserRegistrationDto registrationDto) {
-      Role role = new Role("ROLE_USER");
+      Role role = new Role("");
       if(roleRpo.findAll().isEmpty()){
          role = roleRpo.getRole();
       }

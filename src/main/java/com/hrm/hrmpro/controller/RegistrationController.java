@@ -33,13 +33,12 @@ public class RegistrationController {
    @PostMapping
    public String registerUserAccount(@ModelAttribute("user") 
                   UserRegistrationDto registrationDto) {
-
       try {
          userService.save(registrationDto);
       }catch(Exception e)
       {e.printStackTrace();
          return "redirect:/registration?email_invalid";
       }
-      return "redirect:/registration?success";
+      return "redirect:/login?success";
    }
 }
