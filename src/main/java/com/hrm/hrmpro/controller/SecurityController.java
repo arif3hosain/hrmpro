@@ -51,7 +51,6 @@ public class SecurityController {
 
     @PostMapping("/reset-password")
     public String save(@RequestParam("email")String email,@RequestParam("password")String password) {
-        System.out.println(password);
         User user = userRepository.findByEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);

@@ -5,6 +5,7 @@ package com.hrm.hrmpro.service;
 import com.hrm.hrmpro.domain.Role;
 import com.hrm.hrmpro.domain.User;
 import com.hrm.hrmpro.model.UserRegistrationDto;
+import com.hrm.hrmpro.repos.OrgRepo;
 import com.hrm.hrmpro.repos.RoleRpo;
 import com.hrm.hrmpro.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -25,9 +27,13 @@ public class UserServiceImpl implements UserService {
 
    private UserRepository userRepository;
    private BCryptPasswordEncoder passwordEncoder;
+   @Autowired
+   private HRMjdbc jdbc;
 
    @Autowired
    private RoleRpo roleRpo;
+   @Autowired
+   private OrgRepo orgRepo;
 
    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
       super();
@@ -36,11 +42,15 @@ public class UserServiceImpl implements UserService {
    }
 
    @Override
-   public User save(UserRegistrationDto registrationDto) {
-      Role role = new Role("");
-      if(roleRpo.findAll().isEmpty()){
-         role = roleRpo.getRole();
-      }
+   public void save(UserRegistrationDto registrationDto) {
+//      registrationDto.setOrganization(orgRepo.getOne(1L));
+//      registrationDto.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+//      jdbc.saveUser(registrationDto);
+
+
+      Role role = roleRpo.getOne(1L);
+      List<Role> authorities = new ArrayList<>();
+      authorities.add(role);
 
 
       var user = new User(registrationDto.getFirstName(),
@@ -49,7 +59,7 @@ public class UserServiceImpl implements UserService {
                    passwordEncoder.encode(registrationDto
                           .getPassword()),
                    Arrays.asList(new Role("ROLE_USER")), registrationDto.getEmployee());
-      return userRepository.save(user);
+//      return userRepository.save(user);
    }
 
    @Override

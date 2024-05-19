@@ -26,6 +26,9 @@ public class User {
    @OneToOne
    private Employee employee;
 
+   @OneToOne
+   private Organization organization;
+
    @ManyToMany(fetch = FetchType.EAGER, 
                    cascade = CascadeType.ALL)
    @JoinTable(name = "users_roles", 
@@ -50,6 +53,15 @@ public class User {
       this.password = password;
       this.roles = roles;
       this.employee= employee;
+   }
+
+
+   public Organization getOrganization() {
+      return organization;
+   }
+
+   public void setOrganization(Organization organization) {
+      this.organization = organization;
    }
 
    public Employee getEmployee() {

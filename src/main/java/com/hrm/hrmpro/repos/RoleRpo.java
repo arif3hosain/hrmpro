@@ -6,7 +6,4 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RoleRpo extends JpaRepository<Role, Long> {
 
-
-    @Query("SELECT r FROM Role  r WHERE r.name = 'ROLE_USER' ")
-    Role getRole();
 }

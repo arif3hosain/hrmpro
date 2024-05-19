@@ -1,6 +1,9 @@
 package com.hrm.hrmpro.model;
 
 import com.hrm.hrmpro.domain.Employee;
+import com.hrm.hrmpro.domain.Organization;
+
+import java.beans.Transient;
 
 public class UserRegistrationDto {
 
@@ -9,6 +12,11 @@ public class UserRegistrationDto {
    private String email;
    private String password;
    private Employee employee;
+   private Organization organization;
+
+
+   private Long registerTypeId;
+
 
    public UserRegistrationDto() {
 
@@ -20,6 +28,14 @@ public class UserRegistrationDto {
       this.email = email;
       this.password = password;
       this.employee = employee;
+   }
+
+   public Long getRegisterTypeId() {
+      return registerTypeId;
+   }
+
+   public void setRegisterTypeId(Long registerTypeId) {
+      this.registerTypeId = registerTypeId;
    }
 
    public String getFirstName() {
@@ -60,5 +76,25 @@ public class UserRegistrationDto {
 
    public void setEmployee(Employee employee) {
       this.employee = employee;
+   }
+
+   public Organization getOrganization() {
+      return organization;
+   }
+
+   public void setOrganization(Organization organization) {
+      this.organization = organization;
+   }
+
+   @Override
+   public String toString() {
+      return "UserRegistrationDto{" +
+              "firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", email='" + email + '\'' +
+              ", password='" + password + '\'' +
+              ", employee=" + employee +
+              ", registerTypeId=" + registerTypeId +
+              '}';
    }
 }
