@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/registration")
 public class RegistrationController {
 
    private UserService userService;
@@ -17,44 +18,26 @@ public class RegistrationController {
       this.userService = userService;
    }
 
-/*
    @ModelAttribute("user")
    public UserRegistrationDto userRegistrationDto() {
       return new UserRegistrationDto();
    }
-*/
 
-   @GetMapping("/registration")
-   public String showRegistrationForm(@ModelAttribute("user")
-                                         UserRegistrationDto registrationDto) {
+   @GetMapping
+   public String showRegistrationForm(@RequestParam(value = "registerTypeId", required = false)Long registerTypeId, Model model) {
+      model.addAttribute("registerTypeId",registerTypeId);
       return "registration";
    }
 
-   @PostMapping("/registration")
+   @PostMapping
    public String registerUserAccount(@ModelAttribute("user") 
-                  UserRegistrationDto registrationDto) {
+                  UserRegistrationDto registrationDto,Model model) {
       try {
          userService.save(registrationDto);
       }catch(Exception e)
-      {e.printStackTrace();
-         return "redirect:/registration?email_invalid";
-      }
-      return "redirect:/login?success";
-   }
-
-   @GetMapping("/registration/applicant")
-   public String applicantSignup(@ModelAttribute("user")
-                                    UserRegistrationDto registrationDto) {
-      return "registration";
-   }
-
-   @PostMapping("/registration/applicant")
-   public String applicantSignupPost(@ModelAttribute("user")
-                  UserRegistrationDto registrationDto) {
-      try {
-         userService.save(registrationDto);
-      }catch(Exception e)
-      {e.printStackTrace();
+      {
+         e.printStackTrace();
+         model.addAttribute("registerTypeId",registrationDto.getRegisterTypeId());
          return "redirect:/registration?email_invalid";
       }
       return "redirect:/login?success";

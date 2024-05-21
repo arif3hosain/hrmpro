@@ -27,9 +27,6 @@ public class User {
    @JoinColumn(name = "employee_id", referencedColumnName = "id")
    private Employee employee;
 
-   @ManyToOne
-   @JoinColumn(name = "organization_id", referencedColumnName = "id")
-   private Organization organization;
 
    @ManyToMany(fetch = FetchType.EAGER, 
                    cascade = CascadeType.ALL)
@@ -58,13 +55,7 @@ public class User {
    }
 
 
-   public Organization getOrganization() {
-      return organization;
-   }
 
-   public void setOrganization(Organization organization) {
-      this.organization = organization;
-   }
 
    public Employee getEmployee() {
       return employee;

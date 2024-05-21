@@ -21,6 +21,7 @@
                 <div class="card-body">
                     <!-- Form -->
                     <form th:action="@{/registration}" method="post" th:object="${user}">
+                        <input type="hidden" th:value="${registerTypeId}" name="registerTypeId">
                         <div class="mb-3">
                             <label for="firstName" class="form-label">First Name</label>
                             <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required autofocus>

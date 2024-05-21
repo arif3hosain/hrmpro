@@ -13,8 +13,6 @@ public class UserRegistrationDto {
    private String password;
    private Employee employee;
    private Organization organization;
-
-
    private Long registerTypeId;
 
 

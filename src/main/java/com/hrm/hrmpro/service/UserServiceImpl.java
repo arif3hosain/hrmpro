@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
    @Transactional
    @Override
    public void save(UserRegistrationDto registrationDto) {
-      Role authority = roleRpo.getByName("ROLE_HR");
+      Role authority = roleRpo.getOne(registrationDto.getRegisterTypeId());
        List<Role> authorities = new ArrayList<>();
       authorities.add(authority);
       User user = new User();
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
       user.setLastName(registrationDto.getLastName());
       user.setEmail(registrationDto.getEmail());
       user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
-      user.setOrganization(orgRepo.findById(1L).orElseThrow(() -> new RuntimeException("Organization not found")));
+//      user.setOrganization(orgRepo.findById(1L).orElseThrow(() -> new RuntimeException("Organization not found")));
       user.setRoles(authorities);
       userRepository.save(user);
    }
