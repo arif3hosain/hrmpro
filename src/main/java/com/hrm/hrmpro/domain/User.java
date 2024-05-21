@@ -10,7 +10,7 @@ import java.util.Collection;
 public class User {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
 
    @Column(name = "first_name")
@@ -23,10 +23,12 @@ public class User {
 
    private String password;
 
-   @OneToOne
+   @ManyToOne
+   @JoinColumn(name = "employee_id", referencedColumnName = "id")
    private Employee employee;
 
-   @OneToOne
+   @ManyToOne
+   @JoinColumn(name = "organization_id", referencedColumnName = "id")
    private Organization organization;
 
    @ManyToMany(fetch = FetchType.EAGER, 

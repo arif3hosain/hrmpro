@@ -34,6 +34,8 @@ public class Employee {
     @Column(nullable = false)
     private LocalDate joinDate;
 
+
+
     public Long getId() {
         return id;
     }
@@ -97,6 +99,7 @@ public class Employee {
     public void setJoinDate(LocalDate joinDate) {
         this.joinDate = joinDate;
     }
+
 
     @Override
     public String toString() {

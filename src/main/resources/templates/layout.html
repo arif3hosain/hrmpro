@@ -27,7 +27,7 @@
                     <div sec:authorize="isAuthenticated()" class="collapse navbar-collapse" id="navbarToggle">
                         <ul class="navbar-nav ms-auto">
                             <li sec:authorize="isAuthenticated()" class="navbar-item">
-                                <a  style="color: dodgerblue; font-weight: bold;" th:href="@{/profile/edit/} + ${session.user.employee.id} " class="nav-link">Profile </a>
+                                <a  style="color: dodgerblue; font-weight: bold;" th:href="@{/profile/edit/} + ${session.user.id} " class="nav-link">Profile </a>
                             </li>
                             <!--<li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarEntitiesLink" role="button"
