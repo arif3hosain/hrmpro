@@ -19,7 +19,8 @@
                     <p th:text="${job.category}"></p>
                     <p th:text="${job.salary}"></p>
                     <p th:text="${job.postedDate}"></p>
-                    <a  th:href="@{/jobs/apply/{id}(id=${job.id})}" class="btn btn-primary">Apply</a>
+                    <a th:if="${!applied}"  th:href="@{/jobs/apply/{id}(id=${job.id})}" class="btn btn-primary">Apply</a>
+                    <a th:if="${applied}" th:href="@{/jobs}" class="btn btn-success">Already applied</a>
                 </div>
             </div>
         </div>

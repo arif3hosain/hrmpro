@@ -23,14 +23,8 @@
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/benefits}" class="list-group-item list-group-item-action">[[#{benefit.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/performanceReviews}" class="list-group-item list-group-item-action">[[#{performanceReview.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_APPLICANT')" th:href="@{/compensations}" class="list-group-item list-group-item-action">Applied Jobs</a>
                 </div>
-            </div>
-            <h5>Your Authorities</h5>
-            <!-- Check if the user is authenticated -->
-            <div th:if="${#authorization.expression('isAuthenticated()')}">
-                <!-- Get the authorities and iterate over them -->
-                [<span th:each="authority, iterStat : ${#authentication.getAuthorities()}"
-                       th:text="${authority.authority} + ${iterStat.last ? '' : ', '}"></span>]
             </div>
         </div>
     </body>

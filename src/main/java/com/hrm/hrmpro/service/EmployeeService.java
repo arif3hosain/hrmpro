@@ -6,8 +6,11 @@ import com.hrm.hrmpro.model.EmployeeDTO;
 import com.hrm.hrmpro.model.UserRegistrationDto;
 import com.hrm.hrmpro.repos.DepartmentRepository;
 import com.hrm.hrmpro.repos.EmployeeRepository;
+import com.hrm.hrmpro.repos.OrgRepo;
 import com.hrm.hrmpro.repos.UserRepository;
 import com.hrm.hrmpro.util.NotFoundException;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,8 @@ public class EmployeeService {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private OrgRepo orgRepo;
 
     public EmployeeService(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -46,7 +51,8 @@ public class EmployeeService {
     public void create(final EmployeeDTO employeeDTO) {
         final Employee employee = new Employee();
         mapToEntity(employeeDTO, employee);
-        userService.save(new UserRegistrationDto(employee.getFirstName(), employee.getLastName(), employee.getEmail(), "123456", employeeRepository.save(employee)));
+        Employee emp = employeeRepository.save(employee);
+        userService.save(new UserRegistrationDto(employee.getFirstName(), employee.getLastName(), employee.getEmail(), "123456",emp, employeeDTO.getRole()));
     }
 
     public void update(final Long id, final EmployeeDTO employeeDTO) {
@@ -83,8 +89,13 @@ public class EmployeeService {
         employee.setEmail(employeeDTO.getEmail());
         employee.setPhone(employeeDTO.getPhone());
         employee.setDepartment(departmentRepository.getOne(employeeDTO.getDepartment().getId()));
-        employee.setJoinDate(employeeDTO.getJoinDate());
+        if(employee.getJoinDate() == null){
+            employee.setJoinDate(LocalDate.now());
+        }
         employee.setDepartmentHead(employeeDTO.isDepartmentHead());
+        if(orgRepo.count() != 0){
+            employee.setOrganization(orgRepo.findAll().get(0));
+        }
         return employee;
     }
 

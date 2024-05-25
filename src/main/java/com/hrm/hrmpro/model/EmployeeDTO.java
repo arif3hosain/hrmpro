@@ -1,6 +1,8 @@
 package com.hrm.hrmpro.model;
 
 import com.hrm.hrmpro.domain.Department;
+import com.hrm.hrmpro.domain.Organization;
+import com.hrm.hrmpro.domain.Role;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
@@ -37,6 +39,28 @@ public class EmployeeDTO {
     private LocalDate joinDate;
 
     private boolean departmentHead;
+
+    private Role role;
+
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(String firstName, String lastName, String email, boolean departmentHead, Department department, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departmentHead = departmentHead;
+        this.department = department;
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;

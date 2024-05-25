@@ -3,11 +3,12 @@
         layout:decorate="~{layout}">
     <head>
         <title>[[#{applicant.list.headline}]]</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1" th:text="${job.title}"></h1>
+                <h4 class="flex-grow-1" th:text="${'Applicants for ' + job.title}"></h4>
                 <div>
                     <a th:href="@{/jobs}" class="btn btn-primary ms-2">Browse Jobs</a>
                 </div>
@@ -17,33 +18,29 @@
                 <table class="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">[[#{applicant.id.label}]]</th>
                             <th scope="col">[[#{applicant.firstName.label}]]</th>
                             <th scope="col">[[#{applicant.lastName.label}]]</th>
                             <th scope="col">[[#{applicant.email.label}]]</th>
-                            <th scope="col">[[#{applicant.phone.label}]]</th>
-                            <th scope="col">[[#{applicant.resumeUrl.label}]]</th>
+                            <th scope="col">Resume</th>
                             <th><!-- --></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="job : ${applicants}">
-                            <td>[[${job.applicant.id}]]</td>
-                            <td>[[${job.applicant.firstName}]]</td>
-                            <td>[[${job.applicant.lastName}]]</td>
-                            <td>[[${job.applicant.email}]]</td>
-                            <td>[[${job.applicant.phone}]]</td>
-                            <td>[[${job.applicant.resumeUrl}]]</td>
+                        <tr th:each="v : ${applicants}">
+                            <td>[[${v.applicant.firstName}]]</td>
+                            <td>[[${v.applicant.lastName}]]</td>
+                            <td>[[${v.applicant.email}]]</td>
+                            <td><a  th:href="@{'/jobs/download-resume/'} + ${v.job.id +'/'+ v.applicant.id} " ><i class="fa fa-download"></i> Download Resume</a></td>
                             <td>
                                 <div class="float-end text-nowrap">
-                                    <button th:if="${job.applicant.hired}" type="submit" class="btn btn-sm btn-success">Hired</button>
-                                    <button th:if="${job.applicant.deny}" type="submit" class="btn btn-sm btn-warning">Denied</button>
-                                    <form th:if="${!job.applicant.hired && !job.applicant.deny}" th:action="@{/jobs/hire/{id}/{jobid}(id=${job.applicant.id}, jobid=${job.job.id})}"
+                                                                        <button th:if="${v.hired}" type="submit" class="btn btn-sm btn-success">Hired</button>
+                                                                        <button th:if="${v.deny}" type="submit" class="btn btn-sm btn-warning">Denied</button>
+                                    <form th:if="${!v.hired && !v.deny}" th:action="@{/jobs/hire/{id}/{jobid}(id=${v.applicant.id}, jobid=${v.job.id})}"
                                           th:data-confirm-message="'Do you want to hire this candidate'"
                                           method="get" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">Hire</button>
                                     </form>
-                                    <form th:if="${!job.applicant.hired && !job.applicant.deny}" th:action="@{/jobs/deny/{id}/{jobid}(id=${job.applicant.id}, jobid=${job.job.id})}"
+                                    <form th:if="${!v.hired && !v.deny}" th:action="@{/jobs/deny/{id}/{jobid}(id=${v.applicant.id}, jobid=${v.job.id})}"
                                           th:data-confirm-message="'Do you want to deny this candidate'"
                                           method="get" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">Deny</button>

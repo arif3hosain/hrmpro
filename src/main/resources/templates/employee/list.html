@@ -37,14 +37,9 @@
                             <td>[[${employee.joinDate}]]</td>
                             <td th:if="${employee.departmentHead}">[[${employee.department.name}]] (Head)</td>
                             <td th:if="${!employee.departmentHead}">[[${employee.department.name}]]</td>
-
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/employees/edit/{id}(id=${employee.id})}" class="btn btn-sm btn-secondary">Update Profile</a>
-                                    <form th:action="@{/employees/delete/{id}(id=${employee.id})}"
-                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
-                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{employee.list.delete}]]</button>
-                                    </form>
                                 </div>
                             </td>
                         </tr>

@@ -18,6 +18,13 @@ public class Department {
     @Column(nullable = false, unique = true, length = 100)
     private String name;
 
+    public Department() {
+    }
+
+    public Department( String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

@@ -12,14 +12,16 @@
             <a th:href="@{/jobs}" class="btn btn-secondary">[[#{applicant.add.back}]]</a>
         </div>
     </div>
-    <div th:replace="~{fragments/forms::globalErrors('applicant')}" />
-    <form th:action="${'/jobs/apply'}" th:method="${applicant}" method="post">
-        <input type="hidden" th:field="*{applicant.jobId}">
-        <div th:replace="~{fragments/forms::inputRow(object='applicant', field='firstName', required=true)}" />
-        <div th:replace="~{fragments/forms::inputRow(object='applicant', field='lastName', required=true)}" />
-        <div th:replace="~{fragments/forms::inputRow(object='applicant', field='email', required=true)}" />
-        <div th:replace="~{fragments/forms::inputRow(object='applicant', field='phone', required=true)}" />
-        <div th:replace="~{fragments/forms::inputRow(object='applicant', field='resumeUrl', required=true)}" />
+    <form th:action="${'/jobs/apply'}" th:method="${applicant}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{applicant.job.id}" th:value="${applicant.job.id}">
+        <div>
+            <label for="jobId">Expect Salary</label>
+            <input class="form-control" type="text" id="jobId" name="expectedSalary" required>
+        </div>
+        <div>
+            <label for="resume">Resume:</label>
+            <input class="form-control" type="file" id="resume"  name="file" accept=".pdf,.doc,.docx" required>
+        </div>
         <input type="submit" th:value="#{applicant.add.headline}" class="btn btn-primary mt-4" />
     </form>
 </div>

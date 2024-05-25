@@ -23,6 +23,11 @@ public class Organization {
     private String email;
     private String website;
 
+    public Organization(Long id,String name) {
+        this.id =id;
+        this.organizationName = name;
+    }
+
     public Organization() {
     }
 

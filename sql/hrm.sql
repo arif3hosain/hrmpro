@@ -1,0 +1,2 @@
+
+ALTER TABLE job_applicant MODIFY COLUMN resume LONGBLOB;

@@ -1,7 +1,9 @@
 package com.hrm.hrmpro.controller;
 
+import com.hrm.hrmpro.domain.User;
 import com.hrm.hrmpro.model.EmployeeDTO;
 import com.hrm.hrmpro.repos.DepartmentRepository;
+import com.hrm.hrmpro.repos.UserRepository;
 import com.hrm.hrmpro.service.EmployeeService;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
@@ -26,6 +28,15 @@ public class ProfileController {
     private  EmployeeService employeeService;
     @Autowired
     private DepartmentRepository departmentRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/candidate/edit/{id}")
+    public String candidateEdit(@PathVariable(name = "id") final Long id, final Model model) {
+        User user = userRepository.getById(id);
+        model.addAttribute("user",user );
+        return "employee/profile";
+    }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id, final Model model) {

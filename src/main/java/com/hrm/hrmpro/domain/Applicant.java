@@ -24,17 +24,20 @@ public class Applicant {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(length = 20)
     private String phone;
 
-    @Column(nullable = false, length = 500)
+    @Column(length = 500)
     private String resumeUrl;
 
-    @Column
-    private Boolean hired;
+    public Applicant() {
+    }
 
-    @Column
-    private Boolean deny;
+    public Applicant(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -82,21 +85,5 @@ public class Applicant {
 
     public void setResumeUrl(final String resumeUrl) {
         this.resumeUrl = resumeUrl;
-    }
-
-    public Boolean getHired() {
-        return hired;
-    }
-
-    public void setHired(Boolean hired) {
-        this.hired = hired;
-    }
-
-    public Boolean getDeny() {
-        return deny;
-    }
-
-    public void setDeny(Boolean deny) {
-        this.deny = deny;
     }
 }

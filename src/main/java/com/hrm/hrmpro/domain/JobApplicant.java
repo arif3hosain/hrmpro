@@ -1,6 +1,9 @@
 package com.hrm.hrmpro.domain;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
 
 /**
  * Created by: arif hosain
@@ -28,12 +31,70 @@ public class JobApplicant {
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
 
+    private double expectedSalary;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hired;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean deny;
+    @Lob
+    @Column(nullable = true)
+    private byte[] resume;
+
+    @Transient
+    private MultipartFile file;
+
     public JobApplicant() {
     }
 
-    public JobApplicant(Applicant applicant, Job job) {
+    public JobApplicant(Applicant applicant, Job job,byte[] resume, double salary ) {
         this.applicant = applicant;
         this.job = job;
+        this.resume = resume;
+        this.expectedSalary = salary;
+        this.setHired(false);
+        this.setDeny(false);
+    }
+
+    public Boolean getHired() {
+        return hired;
+    }
+
+    public void setHired(Boolean hired) {
+        this.hired = hired;
+    }
+
+    public Boolean getDeny() {
+        return deny;
+    }
+
+    public void setDeny(Boolean deny) {
+        this.deny = deny;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public byte[] getResume() {
+        return resume;
+    }
+
+    public void setResume(byte[] resume) {
+        this.resume = resume;
+    }
+
+    public double getExpectedSalary() {
+        return expectedSalary;
+    }
+
+    public void setExpectedSalary(double expectedSalary) {
+        this.expectedSalary = expectedSalary;
     }
 
     public Long getId() {
@@ -58,5 +119,17 @@ public class JobApplicant {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    @Override
+    public String toString() {
+        return "JobApplicant{" +
+                "id=" + id +
+                ", applicant=" + applicant +
+                ", job=" + job +
+                ", expectedSalary=" + expectedSalary +
+                ", hired=" + hired +
+                ", deny=" + deny +
+                '}';
     }
 }

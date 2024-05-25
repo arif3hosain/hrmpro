@@ -1,13 +1,16 @@
 package com.hrm.hrmpro.service;
 
 
+import com.hrm.hrmpro.domain.Applicant;
 import com.hrm.hrmpro.domain.Role;
 import com.hrm.hrmpro.domain.User;
 import com.hrm.hrmpro.model.EmployeeDTO;
 import com.hrm.hrmpro.model.UserRegistrationDto;
+import com.hrm.hrmpro.repos.ApplicantRepository;
 import com.hrm.hrmpro.repos.OrgRepo;
 import com.hrm.hrmpro.repos.RoleRpo;
 import com.hrm.hrmpro.repos.UserRepository;
+import com.hrm.hrmpro.util.Authority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +33,8 @@ public class UserServiceImpl implements UserService {
    private RoleRpo roleRpo;
    @Autowired
    private OrgRepo orgRepo;
+   @Autowired
+   private ApplicantRepository applicantRepository;
 
    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
       super();
@@ -40,17 +45,24 @@ public class UserServiceImpl implements UserService {
    @Transactional
    @Override
    public void save(UserRegistrationDto registrationDto) {
-      Role authority = roleRpo.getOne(registrationDto.getRegisterTypeId());
-       List<Role> authorities = new ArrayList<>();
+      Role authority = roleRpo.getByName(registrationDto.getRole().getName());
+      List<Role> authorities = new ArrayList<>();
       authorities.add(authority);
       User user = new User();
       user.setFirstName(registrationDto.getFirstName());
       user.setLastName(registrationDto.getLastName());
       user.setEmail(registrationDto.getEmail());
       user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
-//      user.setOrganization(orgRepo.findById(1L).orElseThrow(() -> new RuntimeException("Organization not found")));
       user.setRoles(authorities);
-      userRepository.save(user);
+      if(authority.getName().equalsIgnoreCase(Authority.ROLE_APPLICANT.toString())){
+         Applicant applicant = new Applicant(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail());
+         applicantRepository.save(applicant);
+      }else {
+         user.setEmployee(registrationDto.getEmployee());
+      }
+      User u = userRepository.save(user);
+
+
    }
 
    @Override

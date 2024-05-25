@@ -2,6 +2,8 @@ package com.hrm.hrmpro.model;
 
 import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.domain.Organization;
+import com.hrm.hrmpro.domain.Role;
+import com.hrm.hrmpro.util.Authority;
 
 import java.beans.Transient;
 
@@ -14,18 +16,28 @@ public class UserRegistrationDto {
    private Employee employee;
    private Organization organization;
    private Long registerTypeId;
+   private Role role;
 
 
    public UserRegistrationDto() {
 
    }
 
-   public UserRegistrationDto(String firstName, String lastName, String email, String password, Employee employee) {
+   public UserRegistrationDto(String firstName, String lastName, String email, String password, Employee employee, Role role) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.password = password;
       this.employee = employee;
+      this.role = role;
+   }
+
+   public Role getRole() {
+      return role;
+   }
+
+   public void setRole(Role role) {
+      this.role = role;
    }
 
    public Long getRegisterTypeId() {

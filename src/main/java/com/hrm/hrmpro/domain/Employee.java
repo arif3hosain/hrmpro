@@ -22,9 +22,9 @@ public class Employee {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String phone;
-
+    @Column(columnDefinition = "boolean default false")
     private boolean departmentHead;
 
     @ManyToOne
@@ -38,7 +38,10 @@ public class Employee {
     @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private Organization organization;
 
+
+
     public Employee() {
+        this.joinDate = LocalDate.now();
     }
 
     public Organization getOrganization() {

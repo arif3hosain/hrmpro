@@ -21,6 +21,8 @@ public class JobApplicantService {
     private final JobApplicantRepo JobApplicantRepo;
     @Autowired
     private ApplicantRepository applicantRepository;
+    @Autowired
+    private SecurityService securityService;
 
     @Autowired
     public JobApplicantService(JobApplicantRepo JobApplicantRepo) {
@@ -43,13 +45,10 @@ public class JobApplicantService {
         return JobApplicantRepo.findAll();
     }
 
-    public boolean alreadyApplied (ApplicantDTO applicantDTO){
-        Applicant applicant = applicantRepository.getApplicant(applicantDTO.getEmail());
-       if(applicant != null){
-           if(JobApplicantRepo.exits(applicantDTO.getJobId(), applicant.getId()) != null){
-               return true;
-           }
-       }
+    public boolean alreadyApplied (Long jobId){
+        if(JobApplicantRepo.exits(jobId, applicantRepository.getApplicant(securityService.getUser().getEmail()).getId()) != null){
+            return true;
+        }
         return false;
     }
 
