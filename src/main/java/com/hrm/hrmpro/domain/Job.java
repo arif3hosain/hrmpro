@@ -28,8 +28,19 @@ public class Job {
     @Column(nullable = false)
     private Double salary;
 
+    @Column(columnDefinition = "boolean default true")
+    public boolean active;
+
     @Column
     private LocalDate postedDate;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Long getId() {
         return id;

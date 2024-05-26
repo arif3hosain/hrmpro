@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Optional;
 
 
 @Controller
@@ -116,8 +117,8 @@ public class JobController {
     @GetMapping("/view/{id}")
     public String getJobDetails(@PathVariable("id") Long id, Model model,final RedirectAttributes redirectAttributes) {
         model.addAttribute("job", jobService.get(id));
-        if(securityService.authenticated()){
-            if(jobApplicantService.alreadyApplied(id)) {
+        if(securityService.authenticated() ){
+            if(jobApplicantService.alreadyApplied(id) ) {
                 redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Already applied to this job"));
                 model.addAttribute("applied", true);
                 return "job/job-details";
@@ -212,6 +213,29 @@ public class JobController {
        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Application has been denied"));
         return "redirect:/jobs/applicants/"+jobid;
     }
+
+    @PostMapping("/active/{id}")
+    public String active(@PathVariable(name = "id") Long id, final RedirectAttributes redirectAttributes) {
+        Optional<Job> jobOptional = jobRepository.findById(id);
+
+        if (jobOptional.isPresent()) {
+            Job job = jobOptional.get();
+            if (job.isActive()) {
+                job.setActive(false);
+                jobRepository.save(job);
+                redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Job has been inactive."));
+            } else {
+                job.setActive(true);
+                jobRepository.save(job);
+                redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("Job has been activated."));
+            }
+        } else {
+            // Handle the case where the job is not found
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, WebUtils.getMessage("Job not found."));
+        }
+        return "redirect:/jobs";
+    }
+
 
 
 

@@ -49,9 +49,10 @@ public class LeaveService {
     }
 
     public void update(final Long id, final LeaveDTO leaveDTO) {
-        final Leave leave = leaveRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
-        mapToEntity(leaveDTO, leave);
+        Leave leave = leaveRepository.getOne(id);
+        leave.setStartDate(leaveDTO.getStartDate());
+        leave.setEndDate(leaveDTO.getEndDate());
+        leave.setReason(leaveDTO.getReason());
         leaveRepository.save(leave);
     }
 

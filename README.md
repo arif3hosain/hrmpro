@@ -35,6 +35,26 @@ DBMS: MySQL
 - J2EE
 - Java 21
 
+## Features
+
+#Jobs
+- Post Job
+- Active/Inactive Job
+- View Candidates
+- Hire/Decline Candidates
+
+#Applicant
+- View Jobs
+- Signup
+- Login
+- Apply Jobs
+- View application Status
+
+
+
+
+
+
 ## Development
 
 Update your local database connection in `application.properties` or create your own `application-local.properties` file to override

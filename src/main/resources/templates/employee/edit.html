@@ -7,33 +7,44 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{employee.edit.headline}]]</h1>
                 <div>
                     <a th:href="@{/employees}" class="btn btn-secondary">[[#{employee.edit.back}]]</a>
                 </div>
             </div>
-            <div th:replace="~{fragments/forms::globalErrors('employee')}" />
-            <form th:action="${requestUri}" method="post">
-                <input name="id" th:value="${employee.id}" type="hidden" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='firstName', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='joinDate', required=true, inputClass='js-datepicker')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='departmentHead', type='checkbox')}" />
-                <div class="row mb-3">
-                    <label  class="col-md-2 col-form-label">
-                        <span>Department*</span>
-                    </label>
-                    <div class="col-md-10">
-                        <select class="form-control"   th:field="*{employee.department}" name="validation-required" required="required">
-                            <option value="">Choose...</option>
-                            <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
-                        </select>
+            <div class="row">
+                <div class="col-lg-8 offset-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title"><h5>[[#{employee.edit.headline}]]</h5></div>
+                        </div>
+                        <div class="card-body">
+                            <div th:replace="~{fragments/forms::globalErrors('employee')}" />
+                            <form th:action="${requestUri}" method="post">
+                                <input name="id" th:value="${employee.id}" type="hidden" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='firstName', required=true)}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='joinDate', required=true, inputClass='js-datepicker')}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='departmentHead', type='checkbox')}" />
+                                <div class="row mb-3">
+                                    <label  class="col-md-2 col-form-label">
+                                        <span>Department*</span>
+                                    </label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" th:field="*{employee.department}" name="validation-required" required="required">
+                                            <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"
+                                                    th:selected="${employee.department != null} ? ${employee.department.id == d.id} : false">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="submit" th:value="#{employee.edit.headline}" class="btn btn-primary mt-4" />
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <input type="submit" th:value="#{employee.edit.headline}" class="btn btn-primary mt-4" />
-            </form>
+            </div>
         </div>
     </body>
 </html>

@@ -27,10 +27,19 @@ public class JobDTO {
 
     private LocalDate postedDate;
 
+    private boolean active;
 
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void setId(final Long id) {

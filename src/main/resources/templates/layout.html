@@ -26,14 +26,17 @@
                     </button>
                     <div sec:authorize="isAuthenticated()" class="collapse navbar-collapse" id="navbarToggle">
                         <ul class="navbar-nav ms-auto">
-                            <li sec:authorize="isAuthenticated()" class="navbar-item">
+                           <!-- <li sec:authorize="isAuthenticated()" class="navbar-item">
                                 <a  style="color: dodgerblue; font-weight: bold;" th:href="@{/profile/edit/} + ${session.user.id} " class="nav-link">Profile </a>
-                            </li>
-                            <!--<li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
+                            </li>-->
+                            <li sec:authorize="isAuthenticated()" class="navbar-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarEntitiesLink" role="button"
                                         aria-expanded="false">Setting</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
-                                    <li><a th:href="@{/employees}" class="dropdown-item">[[#{employee.list.headline}]]</a></li>
+                                    <li><a th:href="@{/profile/edit/} + ${session.user.id} " class="dropdown-item">Profile</a></li>
+                                    <li><a th:href="@{/organization}" class="dropdown-item">Organization</a></li>
+                                    <li><a th:href="@{/logout}" class="dropdown-item">Sign Out</a></li>
+                                   <!-- <li><a th:href="@{/employees}" class="dropdown-item">[[#{employee.list.headline}]]</a></li>
                                     <li><a th:href="@{/departments}" class="dropdown-item">[[#{department.list.headline}]]</a></li>
                                     <li><a th:href="@{/goals}" class="dropdown-item">[[#{goal.list.headline}]]</a></li>
                                     <li><a th:href="@{/performanceReviews}" class="dropdown-item">[[#{performanceReview.list.headline}]]</a></li>
@@ -41,15 +44,15 @@
                                     <li><a th:href="@{/compensations}" class="dropdown-item">[[#{compensation.list.headline}]]</a></li>
                                     <li><a th:href="@{/jobs}" class="dropdown-item">[[#{job.list.headline}]]</a></li>
                                     <li><a th:href="@{/applicants}" class="dropdown-item">[[#{applicant.list.headline}]]</a></li>
-                                    <li><a th:href="@{/leaves}" class="dropdown-item">[[#{leave.list.headline}]]</a></li>
+                                    <li><a th:href="@{/leaves}" class="dropdown-item">[[#{leave.list.headline}]]</a></li>-->
                                 </ul>
-                            </li>-->
+                            </li>
                             <li sec:authorize="isAuthenticated()" class="navbar-item">
                                 <a  class="nav-link">Welcome, <span th:text="${session.user.firstName}"></span></a>
                             </li>
-                            <li  sec:authorize="isAuthenticated()" class="navbar-item" >
+                            <!--<li  sec:authorize="isAuthenticated()" class="navbar-item" >
                                 <a th:href="@{/logout}" class="btn btn-primary">Sign out</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </nav>

@@ -12,13 +12,12 @@
             <div class="col-md-4 mb-5">
                 <h4 class="mb-3">Browse Link</h4>
                 <div class="list-group">
-                    <a  sec:authorize="hasAnyRole('ROLE_HR', 'ROLE_USER','ROLE_ADMIN')"  th:href="@{/profile/edit/} + ${session.user.id} " class="list-group-item list-group-item-action">Profile</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/employees}" class="list-group-item list-group-item-action">[[#{employee.list.headline}]]</a>
                     <a  sec:authorize="hasAnyRole('ROLE_HR','ROLE_ADMIN','ROLE_APPLICANT')" th:href="@{/jobs}" class="list-group-item list-group-item-action">[[#{job.list.headline}]]</a>
                     <a  sec:authorize="hasAnyRole('ROLE_USER','ROLE_HR','ROLE_ADMIN')" th:href="@{/leaves}" class="list-group-item list-group-item-action">[[#{leave.list.headline}]]</a>
                     <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_USER','ROLE_USER')" th:href="@{/goals}" class="list-group-item list-group-item-action">[[#{goal.list.headline}]]</a>
-                    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/departments}" class="list-group-item list-group-item-action">[[#{department.list.headline}]]</a>
+                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/departments}" class="list-group-item list-group-item-action">[[#{department.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/applicants}" class="list-group-item list-group-item-action">[[#{applicant.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/benefits}" class="list-group-item list-group-item-action">[[#{benefit.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/performanceReviews}" class="list-group-item list-group-item-action">[[#{performanceReview.list.headline}]]</a>

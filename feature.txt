@@ -1,0 +1,15 @@
+Leave 
+apply, edit, approve by head, reject by head, only single apply same department, 
+head can see all request of his/her dept, approve, reject, employee see only theirs
+
+
+Signup
+Applicant, HR, Admin
+
+
+Job-------
+Post Job
+Active/Inactive Job
+View Candidates
+Hire/Decline Candidates
+

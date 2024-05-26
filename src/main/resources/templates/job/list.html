@@ -38,10 +38,14 @@
                                 <div class="float-end text-nowrap">
                                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/applicants/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">Applicants</a>
                                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/jobs/edit/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{job.list.edit}]]</a>
-                                    <a th:href="@{/jobs/view/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{button.view}]]</a>
-                                    <form  sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/delete/{id}(id=${job.id})}"
-                                          th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
-                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{applicant.list.delete}]]</button>
+                                    <a  th:href="@{/jobs/view/{id}(id=${job.id})}" class="btn btn-sm btn-secondary">[[#{button.view}]]</a>
+                                    <form th:if="${job.active}"  sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/active/{id}(id=${job.id})}"
+                                          th:data-confirm-message="'Do you want to close this job? '" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-success" >Job Open</button>
+                                    </form>
+                                    <form th:if="${!job.active}"  sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/jobs/active/{id}(id=${job.id})}"
+                                          th:data-confirm-message="'Do you want to re-open this job?'" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-warning" >Job Closed</button>
                                     </form>
                                 </div>
                             </td>

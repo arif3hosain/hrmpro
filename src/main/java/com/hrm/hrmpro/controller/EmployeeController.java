@@ -49,18 +49,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable(name = "id") final Long id, final Model model) {
-        EmployeeDTO dto = employeeService.get(id);
-        model.addAttribute("employee",dto );
+    public String edit(@ModelAttribute("employee") EmployeeDTO employeeDTO, @PathVariable(name = "id") final Long id, final Model model) {
+        employeeDTO = employeeService.get(id);
+        model.addAttribute("employee",employeeDTO );
         model.addAttribute("departments", departmentRepository.findAll());
         return "employee/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") final Long id,
-            @ModelAttribute("employee") @Valid final EmployeeDTO employeeDTO,
+            @ModelAttribute("employee") @Valid final EmployeeDTO employeeDTO, final Model model,
             final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("departments", departmentRepository.findAll());
             return "employee/edit";
         }
         employeeService.update(id, employeeDTO);

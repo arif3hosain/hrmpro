@@ -17,7 +17,7 @@
         <table class="table table-striped table-hover align-middle">
             <thead>
             <tr>
-                <th scope="col">Serial</th>
+                <th scope="col">Emp. Department</th>
                 <th scope="col">[[#{leave.employee.label}]]</th>
                 <th scope="col">[[#{leave.startDate.label}]]</th>
                 <th scope="col">[[#{leave.endDate.label}]]</th>
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             <tr th:each="leave : ${leaves}">
-                <td>[[${leave.id}]]</td>
+                <td>[[${leave.employee.department.name}]]</td>
                 <td>[[${leave.employee.email}]]</td>
                 <td>[[${leave.startDate}]]</td>
                 <td>[[${leave.endDate}]]</td>
@@ -36,7 +36,6 @@
                 <td>[[${leave.reason}]]</td>
                 <td>
                     <div class="float-end text-nowrap">
-                        <a th:if="${leave.status == leave.status.PENDING}" th:href="@{/leaves/edit/{id}(id=${leave.id})}" class="btn btn-sm btn-secondary">[[#{leave.list.edit}]]</a>
                         <form th:if="${leave.status == leave.status.PENDING && head }"  th:action="@{/leaves/approve/{id}(id=${leave.id})}"
                               th:data-confirm-message="'Do you want to approve ?'" method="post" class="js-submit-confirm d-inline">
                             <button type="submit" class="btn btn-sm btn-secondary">Approve</button>

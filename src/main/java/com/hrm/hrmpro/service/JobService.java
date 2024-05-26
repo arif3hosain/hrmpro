@@ -36,6 +36,7 @@ public class JobService {
     public Long create(final JobDTO jobDTO) {
         final Job job = new Job();
         mapToEntity(jobDTO, job);
+        job.setPostedDate(LocalDate.now());
         return jobRepository.save(job).getId();
     }
 
@@ -57,6 +58,7 @@ public class JobService {
         jobDTO.setCategory(job.getCategory());
         jobDTO.setSalary(job.getSalary());
         jobDTO.setPostedDate(LocalDate.now());
+        jobDTO.setActive(job.isActive());
         return jobDTO;
     }
 
