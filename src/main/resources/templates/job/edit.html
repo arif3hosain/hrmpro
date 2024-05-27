@@ -19,6 +19,7 @@
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='description', required=true, type='textarea')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='category', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='job', field='salary', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='job', field='active', type='checkbox')}" />
                 <input type="submit" th:value="#{job.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

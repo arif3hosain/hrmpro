@@ -5,42 +5,44 @@
         <title>[[#{home.index.headline}]]</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <style>
-            .value{
+            .value {
                 text-align: center;
                 font-weight: bold;
                 color: blue;
                 font-size: x-large;
             }
-            .card{
+            .card {
                 padding: 10px;
+                background: beige;
             }
         </style>
     </head>
     <body>
         <div layout:fragment="content">
+
            <div class="row">
                <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
                    <div class="card">
                        <div class="card-body">Pending Leave</div>
-                       <div class="value">10</div>
+                       <div class="value" th:text="${pendingLeave}">10</div>
                    </div>
                </div>
                <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
                    <div class="card">
                        <div class="card-body">Department Total</div>
-                       <div class="value">10</div>
+                       <div class="value" th:text="${totalDept}">10</div>
                    </div>
                </div>
                <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
                    <div class="card">
                        <div class="card-body">Total Open Job</div>
-                       <div class="value">10</div>
+                       <div class="value" th:text="${openJob}">10</div>
                    </div>
                </div>
                <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
                    <div class="card">
                        <div class="card-body">Total Employee</div>
-                       <div class="value">10</div>
+                       <div class="value" th:text="${totalEmp}">10</div>
                    </div>
                </div>
            </div><br>
@@ -48,25 +50,25 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">My Leave Request</div>
-                        <div class="value">10</div>
+                        <div class="value" th:text="${myLeaveRequ}" >10</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">My Approved Leave</div>
-                        <div class="value">10</div>
+                        <div class="value" th:text="${myApprovedLeave}">10</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">My Pending Leave</div>
-                        <div class="value">10</div>
+                        <div class="value" th:text="${myPendingLeave}">10</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">My Objectives/Target</div>
-                        <div class="value">10</div>
+                        <div class="value" th:text="${myObjectives.size()}">10</div>
                     </div>
                 </div>
             </div>

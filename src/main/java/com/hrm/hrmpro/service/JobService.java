@@ -67,6 +67,7 @@ public class JobService {
         job.setDescription(jobDTO.getDescription());
         job.setCategory(jobDTO.getCategory());
         job.setSalary(jobDTO.getSalary());
+        job.setActive(jobDTO.isActive());
         return job;
     }
 

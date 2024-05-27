@@ -2,8 +2,9 @@ package com.hrm.hrmpro.controller;
 
 import com.hrm.hrmpro.domain.Organization;
 import com.hrm.hrmpro.domain.User;
-import com.hrm.hrmpro.repos.OrgRepo;
-import com.hrm.hrmpro.repos.UserRepository;
+import com.hrm.hrmpro.repos.*;
+import com.hrm.hrmpro.service.SecurityService;
+import com.hrm.hrmpro.util.LeaveStatus;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,33 @@ public class HomeController {
     private UserRepository userRepository;
     @Autowired
     private OrgRepo orgRepo;
+    @Autowired
+    private LeaveRepository leaveRepository;
+    @Autowired
+    private SecurityService securityService;
+    @Autowired
+    private DepartmentRepository deptTotal;
+    @Autowired
+    private JobRepository jobRepo;
+    @Autowired
+    private EmployeeRepository empRepo;
+    @Autowired
+    private GoalRepository goalRepository;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user =  userRepository.findByEmail(auth.getName());
         request.getSession().setAttribute("user",user);
+        Long empId = securityService.getEmp().getId();
+        model.addAttribute("pendingLeave", leaveRepository.countByStatus(LeaveStatus.PENDING));
+        model.addAttribute("totalDept", deptTotal.count());
+        model.addAttribute("openJob",jobRepo.countByActiveTrue());
+        model.addAttribute("totalEmp",empRepo.count());
+        model.addAttribute("myLeaveRequ",leaveRepository.myLeaveRequ(empId));
+        model.addAttribute("myApprovedLeave",leaveRepository.countByStatus(LeaveStatus.APPROVED, empId));
+        model.addAttribute("myPendingLeave",leaveRepository.countByStatus(LeaveStatus.PENDING, empId));
+        model.addAttribute("myObjectives",goalRepository.findAllByEmployeeId(empId));
         return "home/index";
     }
 

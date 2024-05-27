@@ -13,6 +13,7 @@ public interface GoalRepository extends JpaRepository<Goal, Long> {
     @Query("SELECT l FROM Goal  l WHERE  l.employee.department.id =:id")
     public Goal getGoal( @Param("id")Long id);
 
-    List<Goal> findAllByEmployeeId(Long id);
+    List<Goal> findAllByEmployeeId(Long empId);
+
     List<Goal> findAllByEmployeeDepartmentId(Long id);
 }
