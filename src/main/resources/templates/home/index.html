@@ -4,10 +4,74 @@
     <head>
         <title>[[#{home.index.headline}]]</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <style>
+            .value{
+                text-align: center;
+                font-weight: bold;
+                color: blue;
+                font-size: x-large;
+            }
+            .card{
+                padding: 10px;
+            }
+        </style>
     </head>
     <body>
         <div layout:fragment="content">
-            <h4 class="mb-3">[[#{home.index.headline}]]</h4>
+           <div class="row">
+               <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
+                   <div class="card">
+                       <div class="card-body">Pending Leave</div>
+                       <div class="value">10</div>
+                   </div>
+               </div>
+               <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
+                   <div class="card">
+                       <div class="card-body">Department Total</div>
+                       <div class="value">10</div>
+                   </div>
+               </div>
+               <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
+                   <div class="card">
+                       <div class="card-body">Total Open Job</div>
+                       <div class="value">10</div>
+                   </div>
+               </div>
+               <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3">
+                   <div class="card">
+                       <div class="card-body">Total Employee</div>
+                       <div class="value">10</div>
+                   </div>
+               </div>
+           </div><br>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">My Leave Request</div>
+                        <div class="value">10</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">My Approved Leave</div>
+                        <div class="value">10</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">My Pending Leave</div>
+                        <div class="value">10</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">My Objectives/Target</div>
+                        <div class="value">10</div>
+                    </div>
+                </div>
+            </div>
+
+          <!--  <h4 class="mb-3">[[#{home.index.headline}]]</h4>
             <p class="mb-5">[(#{home.index.text})]</p>
             <div class="col-md-4 mb-5">
                 <h4 class="mb-3">Browse Link</h4>
@@ -24,7 +88,7 @@
                     <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/compensations}" class="list-group-item list-group-item-action">[[#{compensation.list.headline}]]</a>
                     <a sec:authorize="hasAnyRole('ROLE_APPLICANT')" th:href="@{/compensations}" class="list-group-item list-group-item-action">Applied Jobs</a>
                 </div>
-            </div>
+            </div>-->
         </div>
     </body>
 </html>

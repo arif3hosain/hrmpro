@@ -7,9 +7,9 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h3 class="flex-grow-1">[[#{goal.list.headline}]]</h3>
+                <h4 class="flex-grow-1">[[#{goal.list.headline}]]</h4>
                 <div>
-                    <a th:href="@{/goals/add}" class="btn btn-primary ms-2">[[#{goal.list.createNew}]]</a>
+                    <a th:href="@{/goals/add}" class="btn btn-primary ms-2">New Objective</a>
                 </div>
             </div>
             <div th:if="${goals.empty}">[[#{goal.list.empty}]]</div>

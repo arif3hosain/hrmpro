@@ -42,14 +42,12 @@ public class GoalController {
     public String list(final Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isHR = false;
-        if (auth != null) {
             for (GrantedAuthority authority : auth.getAuthorities()) {
                 if ("ROLE_HR".equals(authority.getAuthority())) {
                     model.addAttribute("goals", goalService.findAll());
                     isHR = true;
                 }
             }
-        }
        if(!isHR){
            if(securityService.getEmp().isDepartmentHead() ){
                model.addAttribute("goals", goalRepository.findAllByEmployeeDepartmentId(securityService.getEmp().getDepartment().getId()));
@@ -72,7 +70,7 @@ public class GoalController {
                 }
             }
         }
-        if(!isHR){
+        if(!isHR) {
             if(securityService.getEmp().isDepartmentHead() ){
                 model.addAttribute("emps", employeeRepository.findAllByDepartmentId(securityService.getEmp().getDepartment().getId()));
             }
@@ -84,10 +82,6 @@ public class GoalController {
     @PostMapping("/add")
     public String add(@ModelAttribute("goal") @Valid final GoalDTO goalDTO,
             final BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("emps", employeeRepository.findAll());
-            return "goal/add";
-        }
         goalService.create(goalDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("goal.create.success"));
         return "redirect:/goals";
@@ -119,6 +113,7 @@ public class GoalController {
             @ModelAttribute("goal") @Valid final GoalDTO goalDTO, final BindingResult bindingResult,
             final RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
+
             model.addAttribute("emps", employeeRepository.findAll());
             return "goal/edit";
         }

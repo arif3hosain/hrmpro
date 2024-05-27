@@ -6,30 +6,25 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div class="d-flex flex-wrap mb-4">
-                <h4 class="flex-grow-1">[[#{goal.add.headline}]]</h4>
-                <div>
-                    <a th:href="@{/goals}" class="btn btn-secondary">[[#{goal.add.back}]]</a>
-                </div>
-            </div>
-            <div th:replace="~{fragments/forms::globalErrors('goal')}" />
-            <form th:action="${requestUri}" method="post">
-                <div th:replace="~{fragments/forms::inputRow(object='goal', field='goalDescription')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='goal', field='targetDate', inputClass='js-datepicker')}" />
-                <div class="row mb-3">
-                    <label  class="col-md-2 col-form-label">
-                        <span>For Employee</span>
-                    </label>
-                    <div class="col-md-10">
-                        <select class="form-control"   th:field="*{goal.employee}" name="validation-required" required="required">
-                            <option value="">Choose...</option>
-                            <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
-                        </select>
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-9"> <h4 class="flex-grow-1">[[#{goal.add.headline}]]</h4></div>
+                            <div class="col-md-3"><a th:href="@{/goals}" class="btn btn-secondary">[[#{goal.add.back}]]</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="~{fragments/forms::globalErrors('goal')}" />
+                        <form th:action="${requestUri}" method="post">
+                            <div th:replace="~{fragments/forms::inputRow(object='goal', field='goalDescription', required=true)}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='goal', field='targetDate', inputClass='js-datepicker', required=true)}" />
+                            <input type="submit" th:value="#{goal.add.headline}" class="btn btn-primary mt-4" />
+                        </form>
                     </div>
                 </div>
-                <input type="submit" th:value="#{goal.add.headline}" class="btn btn-primary mt-4" />
-            </form>
+            </div>
         </div>
     </body>
 </html>

@@ -48,11 +48,6 @@ public class SecurityConfiguration {
                        .clearAuthentication(true)
                        .permitAll()
                );
-
-
-
-
-
       return http.build();
    }
 }

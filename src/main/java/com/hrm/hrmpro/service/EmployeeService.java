@@ -4,10 +4,8 @@ import com.hrm.hrmpro.domain.Employee;
 import com.hrm.hrmpro.domain.User;
 import com.hrm.hrmpro.model.EmployeeDTO;
 import com.hrm.hrmpro.model.UserRegistrationDto;
-import com.hrm.hrmpro.repos.DepartmentRepository;
-import com.hrm.hrmpro.repos.EmployeeRepository;
-import com.hrm.hrmpro.repos.OrgRepo;
-import com.hrm.hrmpro.repos.UserRepository;
+import com.hrm.hrmpro.repos.*;
+import com.hrm.hrmpro.util.Authority;
 import com.hrm.hrmpro.util.NotFoundException;
 
 import java.time.LocalDate;
@@ -30,6 +28,8 @@ public class EmployeeService {
     private UserRepository userRepository;
     @Autowired
     private OrgRepo orgRepo;
+    @Autowired
+    private RoleRpo roleRpo;
 
     public EmployeeService(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -53,6 +53,13 @@ public class EmployeeService {
         mapToEntity(employeeDTO, employee);
         Employee emp = employeeRepository.save(employee);
         userService.save(new UserRegistrationDto(employee.getFirstName(), employee.getLastName(), employee.getEmail(), "123456",emp, employeeDTO.getRole()));
+    }
+
+    public void saveEmployee(final EmployeeDTO employeeDTO) {
+        final Employee employee = new Employee();
+        mapToEntity(employeeDTO, employee);
+        Employee emp = employeeRepository.save(employee);
+        userService.save(new UserRegistrationDto(employee.getFirstName(), employee.getLastName(), employee.getEmail(), "123456",emp, roleRpo.getByName(Authority.ROLE_EMPLOYEE.toString())));
     }
 
     public void update(final Long id, final EmployeeDTO employeeDTO) {

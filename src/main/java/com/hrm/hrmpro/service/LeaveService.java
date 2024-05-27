@@ -9,6 +9,7 @@ import com.hrm.hrmpro.repos.LeaveRepository;
 import com.hrm.hrmpro.util.LeaveStatus;
 import com.hrm.hrmpro.util.NotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -49,11 +50,14 @@ public class LeaveService {
     }
 
     public void update(final Long id, final LeaveDTO leaveDTO) {
-        Leave leave = leaveRepository.getOne(id);
-        leave.setStartDate(leaveDTO.getStartDate());
-        leave.setEndDate(leaveDTO.getEndDate());
-        leave.setReason(leaveDTO.getReason());
-        leaveRepository.save(leave);
+        Optional<Leave> optionalLeave = leaveRepository.findById(id);
+        if (optionalLeave.isPresent()) {
+            Leave leave = optionalLeave.get();
+            leave.setStartDate(leaveDTO.getStartDate());
+            leave.setEndDate(leaveDTO.getEndDate());
+            leave.setReason(leaveDTO.getReason());
+            leaveRepository.save(leave);
+        }
     }
 
     public void delete(final Long id) {

@@ -57,6 +57,7 @@ public class Application  implements ApplicationRunner {
             dept = departmentRepository.save(new Department("Human Resource Management"));
         }
        if(employeeRepository.count() == 0){
+            employeeService.create(new EmployeeDTO("Admin", "Admin", "admin@gmail.com", true, dept == null ? departmentRepository.findAll().get(0): null, roleRpo.getByName(Authority.ROLE_ADMIN.toString())));
             employeeService.create(new EmployeeDTO("HR", "Admin", "hr@gmail.com", true, dept == null ? departmentRepository.findAll().get(0): null, roleRpo.getByName(Authority.ROLE_HR.toString())));
         }
 

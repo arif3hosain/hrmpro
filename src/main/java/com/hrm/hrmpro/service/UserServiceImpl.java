@@ -59,10 +59,9 @@ public class UserServiceImpl implements UserService {
          applicantRepository.save(applicant);
       }else {
          user.setEmployee(registrationDto.getEmployee());
+         user.setRoles(authorities);
       }
-      User u = userRepository.save(user);
-
-
+      userRepository.save(user);
    }
 
    @Override

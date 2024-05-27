@@ -5,6 +5,8 @@ import com.hrm.hrmpro.model.GoalDTO;
 import com.hrm.hrmpro.repos.GoalRepository;
 import com.hrm.hrmpro.util.NotFoundException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class GoalService {
 
     private final GoalRepository goalRepository;
+    @Autowired
+    private SecurityService securityService;
 
     public GoalService(final GoalRepository goalRepository) {
         this.goalRepository = goalRepository;
@@ -34,6 +38,7 @@ public class GoalService {
     public Long create(final GoalDTO goalDTO) {
         final Goal goal = new Goal();
         mapToEntity(goalDTO, goal);
+        goal.setEmployee(securityService.getEmp());
         return goalRepository.save(goal).getId();
     }
 

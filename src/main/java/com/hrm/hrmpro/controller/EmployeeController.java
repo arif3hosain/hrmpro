@@ -43,7 +43,7 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             return "employee/add";
         }
-        employeeService.create(employeeDTO);
+        employeeService.saveEmployee(employeeDTO);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, WebUtils.getMessage("employee.create.success"));
         return "redirect:/employees";
     }
