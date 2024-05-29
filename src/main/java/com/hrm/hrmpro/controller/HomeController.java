@@ -55,6 +55,9 @@ public class HomeController {
         model.addAttribute("myApprovedLeave",leaveRepository.countByStatus(LeaveStatus.APPROVED, empId));
         model.addAttribute("myPendingLeave",leaveRepository.countByStatus(LeaveStatus.PENDING, empId));
         model.addAttribute("myObjectives",goalRepository.findAllByEmployeeId(empId));
+
+        model.addAttribute("pendingObj", goalRepository.countByCompletedFalse(empId));
+        model.addAttribute("doneObj", goalRepository.countByCompletedTrue(empId));
         return "home/index";
     }
 

@@ -56,6 +56,7 @@ public class LeaveService {
             leave.setStartDate(leaveDTO.getStartDate());
             leave.setEndDate(leaveDTO.getEndDate());
             leave.setReason(leaveDTO.getReason());
+            leave.setStatus(leaveDTO.getStatus());
             leaveRepository.save(leave);
         }
     }

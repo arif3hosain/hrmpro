@@ -16,8 +16,8 @@ public class Goal {
     @Column(length = 500)
     private String goalDescription;
 
-    @Column
-    private Boolean completed;
+    @Column(columnDefinition = "boolean default false")
+    private boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "employee", referencedColumnName = "id")
@@ -42,11 +42,11 @@ public class Goal {
         this.goalDescription = goalDescription;
     }
 
-    public Boolean getCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(final Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 

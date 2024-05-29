@@ -7,9 +7,9 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h4 class="flex-grow-1">[[#{performanceReview.list.headline}]]</h4>
+                <h4 class="flex-grow-1">Employee Performance History</h4>
                 <div>
-                    <a th:href="@{/performanceReviews/add}" class="btn btn-primary ms-2">[[#{performanceReview.list.createNew}]]</a>
+                    <a th:href="@{/performanceReviews/add}" class="btn btn-primary ms-2">Add Performance</a>
                 </div>
             </div>
             <div th:if="${performanceReviews.empty}">[[#{performanceReview.list.empty}]]</div>

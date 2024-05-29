@@ -1,10 +1,13 @@
 package com.hrm.hrmpro.controller;
 
+import com.hrm.hrmpro.domain.Goal;
 import com.hrm.hrmpro.model.GoalDTO;
+import com.hrm.hrmpro.model.LeaveDTO;
 import com.hrm.hrmpro.repos.EmployeeRepository;
 import com.hrm.hrmpro.repos.GoalRepository;
 import com.hrm.hrmpro.service.GoalService;
 import com.hrm.hrmpro.service.SecurityService;
+import com.hrm.hrmpro.util.LeaveStatus;
 import com.hrm.hrmpro.util.WebUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 
 @Controller
@@ -128,6 +133,15 @@ public class GoalController {
         goalService.delete(id);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("goal.delete.success"));
         return "redirect:/goals";
+    }
+
+    @PostMapping("/status/{id}")
+    public String approve(@PathVariable(name = "id") final Long id, final RedirectAttributes redirectAttributes) {
+       GoalDTO goal = goalService.get(id);
+       goal.setCompleted(true);
+       goalService.update(id,goal);
+       redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("Task marked as done."));
+       return "redirect:/goals";
     }
 
 }

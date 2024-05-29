@@ -3,6 +3,13 @@
         layout:decorate="~{layout}">
     <head>
         <title>[[#{employee.edit.headline}]]</title>
+        <script>
+            // Ensure the script runs after the document is fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                // Make the input field readonly
+                document.getElementById('email').readOnly = true;
+            });
+        </script>
     </head>
     <body>
         <div layout:fragment="content">
@@ -23,8 +30,8 @@
                                 <input name="id" th:value="${employee.id}" type="hidden" />
                                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='firstName', required=true)}" />
                                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
-                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
-                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true, id='email')}" />
+                                <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true, )}" />
                                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='joinDate', required=true, inputClass='js-datepicker')}" />
                                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='departmentHead', type='checkbox')}" />
                                 <div class="row mb-3">
@@ -32,9 +39,9 @@
                                         <span>Department*</span>
                                     </label>
                                     <div class="col-md-10">
-                                        <select class="form-control" th:field="*{employee.department}" name="validation-required" required="required">
+                                        <select class="form-control" name="department" required="required">
                                             <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"
-                                                    th:selected="${employee.department != null} ? ${employee.department.id == d.id} : false">
+                                                    th:selected="${employee.department.id == d.id}">
                                             </option>
                                         </select>
                                     </div>
@@ -46,5 +53,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

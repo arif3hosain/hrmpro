@@ -6,31 +6,41 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{compensation.add.headline}]]</h1>
-                <div>
-                    <a th:href="@{/compensations}" class="btn btn-secondary">[[#{compensation.add.back}]]</a>
-                </div>
-            </div>
-            <div th:replace="~{fragments/forms::globalErrors('compensation')}" />
-            <form th:action="${requestUri}" method="post">
-                <div th:replace="~{fragments/forms::inputRow(object='compensation', field='bonus')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='compensation', field='commission')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='compensation', field='allowances')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='compensation', field='overtimePay')}" />
-                <div class="row mb-3">
-                    <label  class="col-md-2 col-form-label">
-                        <span>For Employee</span>
-                    </label>
-                    <div class="col-md-10">
-                        <select class="form-control"   th:field="*{compensation.employee}" name="validation-required" required="required">
-                            <option value="">Choose...</option>
-                            <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
-                        </select>
+            <div class="row">
+                <div class="card col-md-8 offset-2">
+                    <div class="card-header">
+                        <div class="d-flex flex-wrap mb-4">
+                            <h4 class="flex-grow-1">[[#{compensation.add.headline}]]</h4>
+                            <div>
+                                <a th:href="@{/compensations}" class="btn btn-secondary">[[#{compensation.add.back}]]</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="~{fragments/forms::globalErrors('compensation')}" />
+                        <form th:action="${requestUri}" method="post">
+                            <div th:replace="~{fragments/forms::inputRow(object='compensation', field='bonus')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='compensation', field='commission')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='compensation', field='allowances')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='compensation', field='overtimePay')}" />
+                            <div class="row mb-3">
+                                <label  class="col-md-2 col-form-label">
+                                    <span>For Employee</span>
+                                </label>
+                                <div class="col-md-10">
+                                    <select class="form-control"   th:field="*{compensation.employee}" name="validation-required" required="required">
+                                        <option value="">Choose...</option>
+                                        <option th:each="e : ${emps}" th:value="${e.id}" th:text="${e.firstName +' ' + e.lastName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="submit" th:value="#{compensation.add.headline}" class="btn btn-primary mt-4" />
+                        </form>
                     </div>
                 </div>
-                <input type="submit" th:value="#{compensation.add.headline}" class="btn btn-primary mt-4" />
-            </form>
+            </div>
+
+
         </div>
     </body>
 </html>

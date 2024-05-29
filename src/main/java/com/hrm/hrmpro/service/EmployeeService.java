@@ -65,6 +65,7 @@ public class EmployeeService {
     public void update(final Long id, final EmployeeDTO employeeDTO) {
         final Employee employee = employeeRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
+
         mapToEntity(employeeDTO, employee);
         employeeRepository.save(employee);
         User user = userRepository.findByEmail(employee.getEmail());

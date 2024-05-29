@@ -9,7 +9,7 @@
             <div class="d-flex flex-wrap mb-4">
                 <h4 class="flex-grow-1">[[#{goal.list.headline}]]</h4>
                 <div>
-                    <a th:href="@{/goals/add}" class="btn btn-primary ms-2">New Objective</a>
+                    <a  sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/goals/add}" class="btn btn-primary ms-2">New Objective</a>
                 </div>
             </div>
             <div th:if="${goals.empty}">[[#{goal.list.empty}]]</div>
@@ -34,9 +34,16 @@
                             <td>[[${goal.employee.firstName}]] [[${goal.employee.lastName}]]</td>
                             <td>
                                 <div class="float-end text-nowrap">
-                                    <a th:href="@{/goals/edit/{id}(id=${goal.id})}" class="btn btn-sm btn-secondary">[[#{goal.list.edit}]]</a>
-                                    <form th:action="@{/goals/delete/{id}(id=${goal.id})}"
-                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                    <form sec:authorize="hasAnyRole('ROLE_HR')" th:if="${!goal.completed}"  th:action="@{/goals/status/{id}(id=${goal.id})}"
+                                          th:data-confirm-message="'Are you sure task is done ?'" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-info">Update Status</button>
+                                    </form>
+                                    <button th:if="${!goal.completed}"  class="btn btn-sm btn-outline-secondary">Pending</button>
+                                    <button th:if="${goal.completed}"  class="btn btn-sm btn-success">Completed</button>
+
+                                    <a sec:authorize="hasAnyRole('ROLE_HR')" th:href="@{/goals/edit/{id}(id=${goal.id})}" class="btn btn-sm btn-secondary">[[#{goal.list.edit}]]</a>
+                                    <form sec:authorize="hasAnyRole('ROLE_HR')" th:action="@{/goals/delete/{id}(id=${goal.id})}"
+                                          th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
                                         <button type="submit" class="btn btn-sm btn-secondary">[[#{goal.list.delete}]]</button>
                                     </form>
                                 </div>

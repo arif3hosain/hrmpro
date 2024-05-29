@@ -7,7 +7,7 @@
     <body>
         <div layout:fragment="content">
             <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{compensation.list.headline}]]</h1>
+                <h3 class="flex-grow-1">[[#{compensation.list.headline}]]</h3>
                 <div>
                     <a th:href="@{/compensations/add}" class="btn btn-primary ms-2">[[#{compensation.list.createNew}]]</a>
                 </div>
@@ -17,7 +17,6 @@
                 <table class="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">[[#{compensation.id.label}]]</th>
                             <th scope="col">[[#{compensation.bonus.label}]]</th>
                             <th scope="col">[[#{compensation.commission.label}]]</th>
                             <th scope="col">[[#{compensation.allowances.label}]]</th>
@@ -28,7 +27,6 @@
                     </thead>
                     <tbody>
                         <tr th:each="compensation : ${compensations}">
-                            <td>[[${compensation.id}]]</td>
                             <td>[[${compensation.bonus}]]</td>
                             <td>[[${compensation.commission}]]</td>
                             <td>[[${compensation.allowances}]]</td>

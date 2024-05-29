@@ -19,10 +19,10 @@ public interface LeaveRepository extends JpaRepository<Leave, Long> {
 
     long countByStatus(LeaveStatus status);
 
-    @Query("SELECT COUNT(l) FROM Leave l WHERE l.status = :status and l.employee.id  =-:empId")
+    @Query("SELECT COUNT(l) FROM Leave l WHERE l.status = :status and l.employee.id  =:empId")
     long countByStatus(@Param("status") LeaveStatus status, @Param("empId")Long empId);
 
-    @Query("SELECT COUNT(l) FROM Leave l WHERE l.employee.id  =-:empId")
+    @Query("SELECT COUNT(l) FROM Leave l WHERE l.employee.id  =:empId")
     long myLeaveRequ( @Param("empId")Long empId);
 
 

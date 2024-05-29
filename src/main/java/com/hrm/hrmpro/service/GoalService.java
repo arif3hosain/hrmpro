@@ -38,7 +38,6 @@ public class GoalService {
     public Long create(final GoalDTO goalDTO) {
         final Goal goal = new Goal();
         mapToEntity(goalDTO, goal);
-        goal.setEmployee(securityService.getEmp());
         return goalRepository.save(goal).getId();
     }
 
@@ -56,7 +55,7 @@ public class GoalService {
     private GoalDTO mapToDTO(final Goal goal, final GoalDTO goalDTO) {
         goalDTO.setId(goal.getId());
         goalDTO.setGoalDescription(goal.getGoalDescription());
-        goalDTO.setCompleted(goal.getCompleted());
+        goalDTO.setCompleted(goal.isCompleted());
         goalDTO.setTargetDate(goal.getTargetDate());
         goalDTO.setEmployee(goal.getEmployee());
         return goalDTO;
@@ -67,6 +66,7 @@ public class GoalService {
         goal.setCompleted(goalDTO.getCompleted());
         goal.setTargetDate(goalDTO.getTargetDate());
         goal.setEmployee(goalDTO.getEmployee());
+        goal.setCompleted(goalDTO.getCompleted());
         return goal;
     }
 

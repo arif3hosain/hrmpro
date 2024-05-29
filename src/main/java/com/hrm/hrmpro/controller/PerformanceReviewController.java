@@ -94,6 +94,7 @@ public class PerformanceReviewController {
             }
         }
         model.addAttribute("performanceReview", performanceReviewService.get(id));
+        model.addAttribute("performance", Performance.values());
         return "performanceReview/edit";
     }
 

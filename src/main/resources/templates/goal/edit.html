@@ -16,7 +16,7 @@
             <form th:action="${requestUri}" method="post">
                 <input name="id" th:value="${goal.id}" type="hidden" />
                 <div th:replace="~{fragments/forms::inputRow(object='goal', field='goalDescription')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />
+<!--                <div th:replace="~{fragments/forms::inputRow(object='goal', field='completed', type='checkbox')}" />-->
                 <div th:replace="~{fragments/forms::inputRow(object='goal', field='targetDate', inputClass='js-datepicker')}" />
                 <div class="row mb-3">
                     <label  class="col-md-2 col-form-label">

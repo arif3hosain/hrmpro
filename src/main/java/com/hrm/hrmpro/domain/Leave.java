@@ -19,6 +19,7 @@ public class Leave {
 
     private LocalDate endDate;
 
+    @Enumerated(EnumType.STRING)
     private LeaveStatus status;
 
     @ManyToOne

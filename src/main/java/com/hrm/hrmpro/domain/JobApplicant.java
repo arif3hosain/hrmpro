@@ -34,10 +34,10 @@ public class JobApplicant {
     private double expectedSalary;
 
     @Column(columnDefinition = "boolean default false")
-    private Boolean hired;
+    private boolean hired;
 
     @Column(columnDefinition = "boolean default false")
-    private Boolean deny;
+    private boolean deny;
     @Lob
     @Column(nullable = true)
     private byte[] resume;
@@ -57,19 +57,19 @@ public class JobApplicant {
         this.setDeny(false);
     }
 
-    public Boolean getHired() {
+    public boolean isHired() {
         return hired;
     }
 
-    public void setHired(Boolean hired) {
+    public void setHired(boolean hired) {
         this.hired = hired;
     }
 
-    public Boolean getDeny() {
+    public boolean isDeny() {
         return deny;
     }
 
-    public void setDeny(Boolean deny) {
+    public void setDeny(boolean deny) {
         this.deny = deny;
     }
 

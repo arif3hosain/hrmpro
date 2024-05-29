@@ -4,6 +4,7 @@
     <head>
         <title>[[#{home.index.headline}]]</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <style>
             .value {
                 text-align: center;
@@ -16,6 +17,7 @@
                 background: beige;
             }
         </style>
+
     </head>
     <body>
         <div layout:fragment="content">
@@ -71,7 +73,47 @@
                         <div class="value" th:text="${myObjectives.size()}">10</div>
                     </div>
                 </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div  sec:authorize="hasAnyRole('ROLE_HR', 'ROLE_EMPLOYEE', 'ROLE_ADMIN')" >
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <script  th:inline="javascript">
+                var pending = [[${pendingObj}]];
+                var done = [[${doneObj}]];
+
+                var xValues = ["Pending", "Task Completed"];
+                var yValues = [pending, done];
+                var barColors = [
+                    "#00aba9",
+                    "#1e7145"
+                ];
+
+                new Chart("myChart", {
+                    type: "pie",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: "Employee Performance Graph"
+                        }
+                    }
+                });
+            </script>
 
           <!--  <h4 class="mb-3">[[#{home.index.headline}]]</h4>
             <p class="mb-5">[(#{home.index.text})]</p>

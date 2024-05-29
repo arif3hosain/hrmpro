@@ -24,18 +24,6 @@
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='lastName', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='email', required=true)}" />
                 <div th:replace="~{fragments/forms::inputRow(object='employee', field='phone', required=true)}" />
-                <div th:replace="~{fragments/forms::inputRow(object='employee', field='joinDate', required=true, inputClass='js-datepicker')}" />
-                <div class="row mb-3">
-                    <label  class="col-md-2 col-form-label">
-                        <span>Department*</span>
-                    </label>
-                    <div class="col-md-10">
-                        <select class="form-control"   name="department" required="required">
-                            <option value="">Choose...</option>
-                            <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}" th:selected="${d.id == employee.department.id}"></option>
-                        </select>
-                    </div>
-                </div>
                 <input type="submit" th:value="#{employee.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>
