@@ -6,19 +6,27 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div class="d-flex flex-wrap mb-4">
-                <h1 class="flex-grow-1">[[#{benefit.add.headline}]]</h1>
-                <div>
-                    <a th:href="@{/benefits}" class="btn btn-secondary">[[#{benefit.add.back}]]</a>
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-9"> <h5 class="flex-grow-1">Add Benefit</h5></div>
+                            <div sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3"><a th:href="@{/benefits}" class="btn btn-secondary">[[#{goal.add.back}]]</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="~{fragments/forms::globalErrors('benefit')}" />
+                        <form th:action="${requestUri}" method="post">
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='name')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='description')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='amount')}" />
+                            <input type="submit" th:value="#{benefit.add.headline}" class="btn btn-primary mt-4" />
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div th:replace="~{fragments/forms::globalErrors('benefit')}" />
-            <form th:action="${requestUri}" method="post">
-                <div th:replace="~{fragments/forms::inputRow(object='benefit', field='name')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='benefit', field='description')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='benefit', field='amount')}" />
-                <input type="submit" th:value="#{benefit.add.headline}" class="btn btn-primary mt-4" />
-            </form>
+
+
         </div>
     </body>
 </html>

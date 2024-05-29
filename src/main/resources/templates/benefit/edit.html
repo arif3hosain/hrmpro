@@ -6,7 +6,28 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <div class="d-flex flex-wrap mb-4">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div  sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-9"> <h5 class="flex-grow-1">Update Benefit</h5></div>
+                            <div sec:authorize="hasAnyRole('ROLE_HR')" class="col-md-3"><a th:href="@{/benefits}" class="btn btn-secondary">[[#{goal.add.back}]]</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="~{fragments/forms::globalErrors('benefit')}" />
+                        <form th:action="${requestUri}" method="post">
+                            <input name="id" th:value="${benefit.id}" type="hidden" />
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='name')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='description')}" />
+                            <div th:replace="~{fragments/forms::inputRow(object='benefit', field='amount')}" />
+                            <input type="submit" value="Update Benefit" class="btn btn-primary mt-4" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="d-flex flex-wrap mb-4">
                 <h1 class="flex-grow-1">[[#{benefit.edit.headline}]]</h1>
                 <div>
                     <a th:href="@{/benefits}" class="btn btn-secondary">[[#{benefit.edit.back}]]</a>
@@ -19,7 +40,7 @@
                 <div th:replace="~{fragments/forms::inputRow(object='benefit', field='description')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='benefit', field='amount')}" />
                 <input type="submit" th:value="#{benefit.edit.headline}" class="btn btn-primary mt-4" />
-            </form>
+            </form>-->
         </div>
     </body>
 </html>
